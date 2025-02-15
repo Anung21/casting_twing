@@ -10,7 +10,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 // Set Nama File
-$fileName = "casting_Twing.xlsx";
+$fileName = "Casting_Twin_H.xlsx";
 
 // Styling arrays
 $titleStyle = [
@@ -118,7 +118,7 @@ try {
     }
 
     // Apply styling
-    $boldCells = ["A5", "D6", "D7", "D8", "K6", "K7", "P1", "P3", "R3"];
+    $boldCells = ["A5", "D6", "D7", "D8", "K6", "K7", "P1", "P3", "R3", "A35", "A40", "A47", "A49", "A52", "A54", "A55", "56"];
     foreach ($boldCells as $cell) {
         $sheet->getStyle($cell)->applyFromArray(['font' => ['bold' => true]]);
     }
@@ -135,7 +135,7 @@ try {
     $spreadsheet->getDefaultStyle()->getFont()->setSize(12);
 
     // Daftar header tabel dengan merge cells
-    $Headers = [
+    $tableHeaders = [
         'A32:B33' => 'No.',
         'C32:D33' => 'Item',
         'E32:G33' => 'Standard',
@@ -200,7 +200,6 @@ try {
 
     // Terapkan styling ke sel A34:S34
     $sheet->getStyle('A34:S34')->applyFromArray($sectionTitleStyle);
-
     // Daftar sel yang akan di-merge beserta nilainya
     $mergedCells = [
         ['range' => 'A35:B39', 'value' => '1'],
@@ -210,7 +209,7 @@ try {
         ['range' => 'A52:B53', 'value' => '5'],
         ['range' => 'A54:B54', 'value' => '6'],
         ['range' => 'A55:B55', 'value' => '7'],
-        ['range' => 'A56:B7', 'value' => '8'],
+        ['range' => 'A56:B57', 'value' => '8'],
     ];
 
     // Looping untuk mengatur merge, nilai, style, dan border pada setiap sel
@@ -228,6 +227,7 @@ try {
             ]
         ]);
     }
+
 
 } catch (\Exception $e) {
     die('Error: ' . $e->getMessage());
