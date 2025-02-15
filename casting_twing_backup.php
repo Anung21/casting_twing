@@ -228,6 +228,220 @@ try {
         ]);
     }
 
+    // cells 1
+    $cells = [
+        ['C35:D37', 'a.Ex. Ejector pin (8plcs)'],
+        ['C38:D39', 'b.Height Ejector pin (3plcs)'],
+        ['E35:G35', 'Tidak minus / amblas'],
+        ['E36:F37', '( Reff. 0 (0 ~ +0.3))'],
+        ['E38:F39', '1 [0 ~ +0.5]'],
+        ['G36', 'Max'],
+        ['G37', 'Min'],
+        ['G38', 'Max'],
+        ['G39', 'Min'],
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    //    cells 2
+    $cells = [
+        ['C40:D41', 'a. Inner diameter(2plcs)'],
+        ['C42:D43', 'b. Depth hole (2plcs)'],
+        ['C44:D46', 'c.Ex. Ejector bushing(2plcs)'],
+        ['E40:F41', 'Ø15 ±0.3'],
+        ['E42:F43', '40.5 ±0.3'],
+        ['E44:G44', 'Tidak minus / amblas'],
+        ['E45:F46', '[ Reff. 0 (0 ~ +0.3)]'],
+        ['G40', '1'],
+        ['G41', '2'],
+        ['G42', '1'],
+        ['G43', '2'],
+        ['G45', '1'],
+        ['G46', '2'],
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    //    cells 3
+    $cells = [
+        ['C47:D47', 'a. Inner diameter ujung'],
+        ['C48:D48', 'b. Depth hole'],
+        ['E47:G47', 'Ø13 (0 ~ +0.3)'],
+        ['E48:G48', '56 (0 ~ +0.5)'],
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    //    cells 4
+    $cells = [
+        ['C49:D49', 'a. Inner diameter'],
+        ['C50:D51', 'b.Appearance hole'],
+        ['E49:G49', 'Ø7 [-0.3 ~ 0]'],
+        ['E50:G51', 'Tidak: undercut, overheat, bengkok, scrap tipis (max 0.3).'],
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    //    cells 5
+    $cells = [
+        ['C52:D52', 'a. Inner diameter'],
+        ['C53:D53', 'b. Depth hole'],
+        ['E52:G52', 'Ø7 [-0.3 ~ 0]'],
+        ['E53:G53', '8 ±0.3'],
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    //    cells 6
+    $cells = [
+        ['C54:D54', 'Lot Marking'],
+        ['E54:G54', 'Ø7 [-0.3 ~ 0]'],
+
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    //    cells 7
+    $cells = [
+        ['C55:D55', 'Appearance ex gate'],
+        ['E55:G55', 'Tidak : gompal & keropos'],
+
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    // Cells 8
+    $cells = [
+        ['C56:D57', 'Appearance permukaan move'],
+        ['E56:G57', 'Tidak : Retak, undercut, flowline, overheat & gompal.'],
+    ];
+
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'font' => [
+                'bold' => false // Hapus bold
+            ],
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+
 
 } catch (\Exception $e) {
     die('Error: ' . $e->getMessage());

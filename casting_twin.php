@@ -175,28 +175,36 @@ try {
         $sheet->getStyle($range)->applyFromArray($headerStyle);
     }
 
-    // Merge sel A34:S34 untuk judul bagian
-    $sheet->mergeCells('A34:S34');
-    $sheet->setCellValue('A34', 'I. LUBANG & INSERT PIN AREA MOVE');
+    // Daftar judul bagian dan rentang selnya
+    $sections = [
+        ['A34:S34', ''],
+        ['A58:G58', 'II. LUBANG & INSERT PIN AREA CORE 1'],
+        ['I58:S58', '']
+    ];
 
     // Styling untuk judul bagian
     $sectionTitleStyle = [
-        'font' => [
-            'bold' => true,
-            'italic' => true
-        ],
+        'font' => ['bold' => true, 'italic' => true],
         'alignment' => [
             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
         ],
         'fill' => [
             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-            'startColor' => ['rgb' => 'D9F1F1'] // Warna latar biru muda seperti gambar
+            'startColor' => ['rgb' => 'D9F1F1'] // Warna latar biru muda
         ],
         'borders' => [
             'outline' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE]
         ]
     ];
+
+    // Iterasi untuk mengatur judul bagian
+    foreach ($sections as [$range, $title]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $title);
+        $sheet->getStyle($range)->applyFromArray($sectionTitleStyle);
+    }
+
 
     // Terapkan styling ke sel A34:S34
     $sheet->getStyle('A34:S34')->applyFromArray($sectionTitleStyle);
@@ -210,6 +218,7 @@ try {
         ['range' => 'A54:B54', 'value' => '6'],
         ['range' => 'A55:B55', 'value' => '7'],
         ['range' => 'A56:B57', 'value' => '8'],
+        ['range' => 'A59:B60', 'value' => '9'],
     ];
 
     // Looping untuk mengatur merge, nilai, style, dan border pada setiap sel
@@ -228,8 +237,9 @@ try {
         ]);
     }
 
-    // cells 1
+    // Definisi sel yang akan digabungkan dan diisi dengan teks
     $cells = [
+        // Cells 1
         ['C35:D37', 'a.Ex. Ejector pin (8plcs)'],
         ['C38:D39', 'b.Height Ejector pin (3plcs)'],
         ['E35:G35', 'Tidak minus / amblas'],
@@ -239,27 +249,22 @@ try {
         ['G37', 'Min'],
         ['G38', 'Max'],
         ['G39', 'Min'],
-    ];
 
-    foreach ($cells as [$range, $text]) {
-        $sheet->mergeCells($range);
-        $sheet->setCellValue(explode(':', $range)[0], $text);
+        // Cells 1 bagian kanan 
+        ['J35', 'Visual'],
+        ['J36:J37', 'Caliper'],
+        ['J38:J39', 'Caliper'],
+        ['K35', 'OK / NG'],
+        ['L35', 'OK / NG'],
+        ['M35', 'OK / NG'],
+        ['N35', 'OK / NG'],
+        ['O35', 'OK / NG'],
+        ['P35', 'OK / NG'],
+        ['Q35', 'OK / NG'],
+        ['R35', 'OK / NG'],
+        ['S35', 'OK / NG'],
 
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
-            ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
-        ]);
-    }
-
-    //    cells 2
-    $cells = [
+        // Cells 2
         ['C40:D41', 'a. Inner diameter(2plcs)'],
         ['C42:D43', 'b. Depth hole (2plcs)'],
         ['C44:D46', 'c.Ex. Ejector bushing(2plcs)'],
@@ -273,169 +278,147 @@ try {
         ['G43', '2'],
         ['G45', '1'],
         ['G46', '2'],
-    ];
 
-    foreach ($cells as [$range, $text]) {
-        $sheet->mergeCells($range);
-        $sheet->setCellValue(explode(':', $range)[0], $text);
+        // Cells 2 bagian kanan 
+        ['J45:J46', 'Caliper'],
+        ['K44', 'OK / NG'],
+        ['L44', 'OK / NG'],
+        ['M44', 'OK / NG'],
+        ['N44', 'OK / NG'],
+        ['O44', 'OK / NG'],
+        ['P44', 'OK / NG'],
+        ['Q44', 'OK / NG'],
+        ['R44', 'OK / NG'],
+        ['S44', 'OK / NG'],
 
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
-            ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
-        ]);
-    }
-
-    //    cells 3
-    $cells = [
+        // Cells 3
         ['C47:D47', 'a. Inner diameter ujung'],
         ['C48:D48', 'b. Depth hole'],
         ['E47:G47', 'Ø13 (0 ~ +0.3)'],
         ['E48:G48', '56 (0 ~ +0.5)'],
-    ];
 
-    foreach ($cells as [$range, $text]) {
-        $sheet->mergeCells($range);
-        $sheet->setCellValue(explode(':', $range)[0], $text);
+        // Cells 3 bagian kanan 
+        ['I44', 'visual'],
+        ['I40', '-'],
+        ['I41', '-'],
+        ['I42', '-'],
+        ['I43', '-'],
+        ['J44', 'visual'],
+        ['J40:J41', 'Caliper'],
+        ['J42:J43', 'Caliper'],
 
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
-            ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
-        ]);
-    }
-
-    //    cells 4
-    $cells = [
+        // Cells 4
         ['C49:D49', 'a. Inner diameter'],
         ['C50:D51', 'b.Appearance hole'],
         ['E49:G49', 'Ø7 [-0.3 ~ 0]'],
         ['E50:G51', 'Tidak: undercut, overheat, bengkok, scrap tipis (max 0.3).'],
-    ];
 
-    foreach ($cells as [$range, $text]) {
-        $sheet->mergeCells($range);
-        $sheet->setCellValue(explode(':', $range)[0], $text);
-
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
-            ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
-        ]);
-    }
-
-    //    cells 5
-    $cells = [
+        // Cells 5
         ['C52:D52', 'a. Inner diameter'],
         ['C53:D53', 'b. Depth hole'],
         ['E52:G52', 'Ø7 [-0.3 ~ 0]'],
         ['E53:G53', '8 ±0.3'],
-    ];
 
-    foreach ($cells as [$range, $text]) {
-        $sheet->mergeCells($range);
-        $sheet->setCellValue(explode(':', $range)[0], $text);
-
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
-            ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
-        ]);
-    }
-
-    //    cells 6
-    $cells = [
+        // Cells 6
         ['C54:D54', 'Lot Marking'],
         ['E54:G54', 'Ø7 [-0.3 ~ 0]'],
 
-    ];
-
-    foreach ($cells as [$range, $text]) {
-        $sheet->mergeCells($range);
-        $sheet->setCellValue(explode(':', $range)[0], $text);
-
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
-            ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
-        ]);
-    }
-
-    //    cells 7
-    $cells = [
+        // Cells 7
         ['C55:D55', 'Appearance ex gate'],
         ['E55:G55', 'Tidak : gompal & keropos'],
 
+        // Cells 8
+        ['C56:D57', 'Appearance permukaan move'],
+        ['E56:G57', 'Tidak : Retak, undercut, flowline, overheat & gompal.'],
+
+        // Cells['C56:D57', 'Appearance permukaan move'],
+        ['C59:D59', 'b.Thickness'],
+        ['C60:D60', 'c.Thickness'],
+        ['E59:G59', '11.07 ±0.3'],
+        ['E60:G60', '10.5 (0 ~ +0.3)'],
     ];
 
+    // Loop tunggal untuk memproses semua sel
     foreach ($cells as [$range, $text]) {
         $sheet->mergeCells($range);
         $sheet->setCellValue(explode(':', $range)[0], $text);
 
         $sheet->getStyle($range)->applyFromArray([
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks vertikal
             ],
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
                 'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
             ],
+            'font' => ['bold' => false], // Hapus bold
             'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
         ]);
     }
 
-    //    cells 8
-    $cells = [
-        ['C56:D57', ' Appearance permukaan move'],
-        ['E56:G57', 'Tidak : Retak, undercut, flowline, overheat & gompal. '],
+    // Merge kolom H35:H60
+    $sheet->mergeCells('H35:H60');
+    $sheet->setCellValue('H35', 'All Point If Job Set Up');
+
+    // Styling untuk teks vertikal dan center
+    $sheet->getStyle('H35:H60')->applyFromArray([
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Pusatkan secara horizontal
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER, // Pusatkan secara vertikal
+            'textRotation' => 90 // Putar teks 90 derajat (vertikal)
+        ],
+        'font' => [
+            'bold' => true
+        ],
+        'borders' => [
+            'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+        ]
+    ]);
+
+    // Daftar kolom yang akan di-merge dan teksnya
+    $mergeCells = [
+        'I35:I39' => '1x / Shift',
+        'I44:I46' => '1x / Shift',
+        'I47:I48' => '1x / Shift',
+        'I50:I51' => '1x / Shift',
+        'I53:I55' => '1x / Shift',
+        'I56:I57' => '1x / Shift',
+        'I59:I60' => '1x / Shift',
 
     ];
 
-    foreach ($cells as [$range, $text]) {
+    // Terapkan merge, set nilai, dan styling
+    foreach ($mergeCells as $range => $text) {
         $sheet->mergeCells($range);
         $sheet->setCellValue(explode(':', $range)[0], $text);
-
         $sheet->getStyle($range)->applyFromArray([
             'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
-                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'textRotation' => 90
             ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            'font' => ['bold' => false],
+            'borders' => ['allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]]
+        ]);
+    }
+
+
+    // Daftar range yang akan diberikan border
+    $ranges = ['K36:S39', 'K40:S41', 'K42:S43', 'K45:S46',];
+
+    // Terapkan border dan alignment ke setiap range
+    foreach ($ranges as $range) {
+        $sheet->getStyle($range)->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN // Border tipis
+                ]
             ],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Pusatkan teks secara horizontal
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Pusatkan teks secara vertikal
+            ]
         ]);
     }
 
