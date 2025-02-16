@@ -33,6 +33,8 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $sheet->setTitle('Check Sheet');
 
+// ======================== PAGE 1 ===============
+
 try {
     // Set column widths
     $columnWidths = ['A' => 5, 'B' => 20, 'C' => 30, 'D' => 15, 'E' => 15, 'F' => 15, 'G' => 15, 'H' => 15, 'I' => 15, 'J' => 15, 'K' => 15, 'L' => 15, 'M' => 15, 'N' => 15, 'O' => 15, 'P' => 15, 'Q' => 15, 'R' => 15, 'S' => 15];
@@ -108,8 +110,18 @@ try {
     $tableData = [
         ['A6' => 'Nama part', 'D6' => 'TWIN HEAD', 'J6' => 'Custom', 'K6' => 'PT. DNP', 'P6' => 'Nama mesin'],
         ['A7' => 'No. part', 'D7' => 'P332204-710B', 'J7' => 'Model', 'K7' => '4D34G', 'P7' => 'No. mesin'],
-        ['A8' => 'Code', 'D8' => 'AV – 1', 'J8' => 'No. die', 'P8' => 'No. jig']
+        ['A8' => 'Code', 'D8' => 'AV – 1', 'J8' => 'No. die', 'P8' => 'No. jig'],
     ];
+
+    // Set marge keterangan-gambar B9
+    $sheet->mergeCells("B9");
+    $sheet->setCellValue('B9', 'Gambar : ');
+    $sheet->getStyle("B9")->applyFromArray($titleStyle);
+
+    //  style B9 
+    $sheet->getStyle("B9")->getFont()->setSize(12);
+    $sheet->getStyle("B9")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("B9")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
     foreach ($tableData as $row) {
         foreach ($row as $cell => $value) {
@@ -132,8 +144,17 @@ try {
     $sheet->getStyle("A1:S8")->applyFromArray($borderStyle);
 
     // Set default font size set ke dua
+    //  border di sekitar range A32:S62
+    $sheet->getStyle('A32:S62')->applyFromArray([
+        'borders' => [
+            'outline' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+            ]
+        ]
+    ]);
     $spreadsheet->getDefaultStyle()->getFont()->setSize(12);
 
+    // ====================== PAGE 2 =====================
     // Daftar header tabel dengan merge cells
     $tableHeaders = [
         'A32:B33' => 'No.',
