@@ -280,6 +280,13 @@ try {
         ['G46', '2'],
 
         // Cells 2 bagian kanan 
+        ['I40', '-'],
+        ['I41', '-'],
+        ['I42', '-'],
+        ['I43', '-'],
+        ['J44', 'visual'],
+        ['J40:J41', 'Caliper'],
+        ['J42:J43', 'Caliper'],
         ['J45:J46', 'Caliper'],
         ['K44', 'OK / NG'],
         ['L44', 'OK / NG'],
@@ -298,14 +305,8 @@ try {
         ['E48:G48', '56 (0 ~ +0.5)'],
 
         // Cells 3 bagian kanan 
-        ['I44', 'visual'],
-        ['I40', '-'],
-        ['I41', '-'],
-        ['I42', '-'],
-        ['I43', '-'],
-        ['J44', 'visual'],
-        ['J40:J41', 'Caliper'],
-        ['J42:J43', 'Caliper'],
+        ['J47', 'Caliper'],
+        ['J48', 'Caliper'],
 
         // Cells 4
         ['C49:D49', 'a. Inner diameter'],
@@ -313,29 +314,88 @@ try {
         ['E49:G49', 'Ø7 [-0.3 ~ 0]'],
         ['E50:G51', 'Tidak: undercut, overheat, bengkok, scrap tipis (max 0.3).'],
 
+        // Cells 4 bagian kanan 
+        ['I49', '-'],
+        ['J49', 'Caliper'],
+        ['J50:J51', 'Visual'],
+        ['K50:K51', 'OK / NG'],
+        ['L50:L51', 'OK / NG'],
+        ['M50:M51', 'OK / NG'],
+        ['N50:N51', 'OK / NG'],
+        ['O50:O51', 'OK / NG'],
+        ['P50:P51', 'OK / NG'],
+        ['Q50:Q51', 'OK / NG'],
+        ['R50:R51', 'OK / NG'],
+        ['S50:S51', 'OK / NG'],
+
         // Cells 5
         ['C52:D52', 'a. Inner diameter'],
         ['C53:D53', 'b. Depth hole'],
         ['E52:G52', 'Ø7 [-0.3 ~ 0]'],
         ['E53:G53', '8 ±0.3'],
 
+        // Cells 5 bagian kanan 
+        ['I52', '-'],
+        ['J52', 'Caliper'],
+        ['J53', 'Caliper'],
+
         // Cells 6
         ['C54:D54', 'Lot Marking'],
         ['E54:G54', 'Ø7 [-0.3 ~ 0]'],
+
+        // Cells 6 bagian kanan 
+        ['J54', 'Visual'],
+        ['K54:K54', 'OK / NG'],
+        ['L54:L54', 'OK / NG'],
+        ['M54:M54', 'OK / NG'],
+        ['N54:N54', 'OK / NG'],
+        ['O54:O54', 'OK / NG'],
+        ['P54:P54', 'OK / NG'],
+        ['Q54:Q54', 'OK / NG'],
+        ['R54:R54', 'OK / NG'],
+        ['S54:S54', 'OK / NG'],
 
         // Cells 7
         ['C55:D55', 'Appearance ex gate'],
         ['E55:G55', 'Tidak : gompal & keropos'],
 
+        //  Cells 7 bagian kanan 
+        ['J55', 'Visual'],
+        ['K55:K55', 'OK / NG'],
+        ['L55:L55', 'OK / NG'],
+        ['M55:M55', 'OK / NG'],
+        ['N55:N55', 'OK / NG'],
+        ['O55:O55', 'OK / NG'],
+        ['P55:P55', 'OK / NG'],
+        ['Q55:Q55', 'OK / NG'],
+        ['R55:R55', 'OK / NG'],
+        ['S55:S55', 'OK / NG'],
+
         // Cells 8
         ['C56:D57', 'Appearance permukaan move'],
         ['E56:G57', 'Tidak : Retak, undercut, flowline, overheat & gompal.'],
 
-        // Cells['C56:D57', 'Appearance permukaan move'],
+        //  Cells 8 bagian kanan
+        ['J56:J57', 'Visual'],
+        ['K56:K57', 'OK / NG'],
+        ['L56:L57', 'OK / NG'],
+        ['M56:M57', 'OK / NG'],
+        ['N56:N57', 'OK / NG'],
+        ['O56:O57', 'OK / NG'],
+        ['P56:P57', 'OK / NG'],
+        ['Q56:Q57', 'OK / NG'],
+        ['R56:R57', 'OK / NG'],
+        ['S56:S57', 'OK / NG'],
+
+        //  Cells 9
         ['C59:D59', 'b.Thickness'],
         ['C60:D60', 'c.Thickness'],
         ['E59:G59', '11.07 ±0.3'],
         ['E60:G60', '10.5 (0 ~ +0.3)'],
+
+        //  Cells 9 bagian kanan
+        ['J59', 'Caliper'],
+        ['J60', 'Caliper'],
     ];
 
     // Loop tunggal untuk memproses semua sel
@@ -403,9 +463,8 @@ try {
         ]);
     }
 
-
     // Daftar range yang akan diberikan border
-    $ranges = ['K36:S39', 'K40:S41', 'K42:S43', 'K45:S46',];
+    $ranges = ['K36:S39', 'K40:S41', 'K42:S43', 'K45:S46', 'K47:S48', 'K49:S49', 'K52:S53', 'K59:S60'];
 
     // Terapkan border dan alignment ke setiap range
     foreach ($ranges as $range) {
@@ -421,7 +480,6 @@ try {
             ]
         ]);
     }
-
 
 } catch (\Exception $e) {
     die('Error: ' . $e->getMessage());
