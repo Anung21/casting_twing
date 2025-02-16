@@ -627,6 +627,317 @@ try {
         ]
     ]);
 
+    // --------------------------- BAGIAN 2 -----------------------
+    // Daftar header tabel dengan merge cells
+    $tableHeaders = [
+        'A72:B73' => 'No.',
+        'C72:D73' => 'Item',
+        'E72:G73' => 'Standard',
+        'H72:H73' => 'Setup',
+        'I72:I73' => 'Patrol',
+        'J72:J72' => 'Control',
+        'J73:J73' => 'Method',
+        'K72:S72' => 'Cavity Sample',
+    ];
+
+    // Styling untuk header tabel
+    $headerStyle = [
+        'font' => ['bold' => true],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+        ],
+        'borders' => [
+            'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+        ]
+    ];
+
+    // Memberikan border untuk setiap kolom di baris K33:S33
+    for ($col = 'K'; $col <= 'S'; $col++) {
+        $cell = $col . '73';
+        $sheet->getStyle($cell)->applyFromArray([
+            'borders' => [
+                'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+            ]
+        ]);
+    }
+
+    // Loop untuk mengatur merge, nilai, dan style pada tiap header
+    foreach ($tableHeaders as $range => $title) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $title);
+        $sheet->getStyle($range)->applyFromArray($headerStyle);
+    }
+
+    // Daftar judul bagian dan rentang selnya
+    $sections = [
+        ['A85:G85', 'III. LUBANG & INSERT PIN AREA CORE 2'],
+        ['A92:G92', 'IV. LUBANG & INSERT PIN AREA CORE 3. LUBANG & INSERT PIN AREA CORE 1'],
+        ['A97:G97', 'V. LUBANG & INSERT PIN AREA FIX'],
+        ['A114:G114', 'VI. OTHERS'],
+        ['I85:S85', ''],
+        ['I92:S92', ''],
+        ['I97:S97', ''],
+        ['I114:S114', ''],
+
+    ];
+
+    // Styling untuk judul bagian
+    $sectionTitleStyle = [
+        'font' => ['bold' => true, 'italic' => true],
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+        ],
+        'fill' => [
+            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+            'startColor' => ['rgb' => 'D9F1F1'] // Warna latar biru muda
+        ],
+        'borders' => [
+            'outline' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE]
+        ]
+    ];
+
+    $mergedCells = [
+        ['range' => 'A74:B78', 'value' => '10'],
+        ['range' => 'A79:B80', 'value' => '11'],
+        ['range' => 'A81:B81', 'value' => '12'],
+        ['range' => 'A82:B82', 'value' => '13'],
+        ['range' => 'A83:B84', 'value' => '14'],
+        ['range' => 'A86:B87', 'value' => '15'],
+        ['range' => 'A88:B89', 'value' => '16'],
+        ['range' => 'A90:B91', 'value' => '17'],
+        ['range' => 'A93:B94', 'value' => '18'],
+        ['range' => 'A95:B96', 'value' => '19'],
+        ['range' => 'A98:B98', 'value' => '20'],
+        ['range' => 'A99:B101', 'value' => '21'],
+        ['range' => 'A102:B102', 'value' => '22'],
+        ['range' => 'A103:B111', 'value' => '23'],
+        ['range' => 'A112:B113', 'value' => '24'],
+        ['range' => 'A115:B116', 'value' => '25'],
+    ];
+
+    // Looping untuk mengatur merge, nilai, style, dan border pada setiap sel
+    foreach ($mergedCells as $cell) {
+        $sheet->mergeCells($cell['range']);
+        $sheet->setCellValue(explode(':', $cell['range'])[0], $cell['value']);
+        $sheet->getStyle($cell['range'])->applyFromArray($textCenter);
+
+        // Tambahkan border
+        $sheet->getStyle($cell['range'])->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                ]
+            ]
+        ]);
+    }
+
+    // Iterasi untuk mengatur judul bagian
+    foreach ($sections as [$range, $title]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $title);
+        $sheet->getStyle($range)->applyFromArray($sectionTitleStyle);
+    }
+    $cells = [
+        // Cells 1
+        ['C35:D37', 'a.Ex. Ejector pin (8plcs)'],
+        ['C38:D39', 'b.Height Ejector pin (3plcs)'],
+        ['E35:G35', 'Tidak minus / amblas'],
+        ['E36:F37', '( Reff. 0 (0 ~ +0.3))'],
+        ['E38:F39', '1 [0 ~ +0.5]'],
+        ['G36', 'Max'],
+        ['G37', 'Min'],
+        ['G38', 'Max'],
+        ['G39', 'Min'],
+
+        // Cells 1 bagian kanan 
+        ['J35', 'Visual'],
+        ['J36:J37', 'Caliper'],
+        ['J38:J39', 'Caliper'],
+        ['K35', 'OK / NG'],
+        ['L35', 'OK / NG'],
+        ['M35', 'OK / NG'],
+        ['N35', 'OK / NG'],
+        ['O35', 'OK / NG'],
+        ['P35', 'OK / NG'],
+        ['Q35', 'OK / NG'],
+        ['R35', 'OK / NG'],
+        ['S35', 'OK / NG'],
+
+        // Cells 2
+        ['C40:D41', 'a. Inner diameter(2plcs)'],
+        ['C42:D43', 'b. Depth hole (2plcs)'],
+        ['C44:D46', 'c.Ex. Ejector bushing(2plcs)'],
+        ['E40:F41', 'Ø15 ±0.3'],
+        ['E42:F43', '40.5 ±0.3'],
+        ['E44:G44', 'Tidak minus / amblas'],
+        ['E45:F46', '[ Reff. 0 (0 ~ +0.3)]'],
+        ['G40', '1'],
+        ['G41', '2'],
+        ['G42', '1'],
+        ['G43', '2'],
+        ['G45', '1'],
+        ['G46', '2'],
+
+        // Cells 2 bagian kanan 
+        ['I40', '-'],
+        ['I41', '-'],
+        ['I42', '-'],
+        ['I43', '-'],
+        ['J44', 'visual'],
+        ['J40:J41', 'Caliper'],
+        ['J42:J43', 'Caliper'],
+        ['J45:J46', 'Caliper'],
+        ['K44', 'OK / NG'],
+        ['L44', 'OK / NG'],
+        ['M44', 'OK / NG'],
+        ['N44', 'OK / NG'],
+        ['O44', 'OK / NG'],
+        ['P44', 'OK / NG'],
+        ['Q44', 'OK / NG'],
+        ['R44', 'OK / NG'],
+        ['S44', 'OK / NG'],
+
+        // Cells 3
+        ['C47:D47', 'a. Inner diameter ujung'],
+        ['C48:D48', 'b. Depth hole'],
+        ['E47:G47', 'Ø13 (0 ~ +0.3)'],
+        ['E48:G48', '56 (0 ~ +0.5)'],
+
+        // Cells 3 bagian kanan 
+        ['J47', 'Caliper'],
+        ['J48', 'Caliper'],
+
+        // Cells 4
+        ['C49:D49', 'a. Inner diameter'],
+        ['C50:D51', 'b.Appearance hole'],
+        ['E49:G49', 'Ø7 [-0.3 ~ 0]'],
+        ['E50:G51', 'Tidak: undercut, overheat, bengkok, scrap tipis (max 0.3).'],
+
+        // Cells 4 bagian kanan 
+        ['I49', '-'],
+        ['J49', 'Caliper'],
+        ['J50:J51', 'Visual'],
+        ['K50:K51', 'OK / NG'],
+        ['L50:L51', 'OK / NG'],
+        ['M50:M51', 'OK / NG'],
+        ['N50:N51', 'OK / NG'],
+        ['O50:O51', 'OK / NG'],
+        ['P50:P51', 'OK / NG'],
+        ['Q50:Q51', 'OK / NG'],
+        ['R50:R51', 'OK / NG'],
+        ['S50:S51', 'OK / NG'],
+
+        // Cells 5
+        ['C52:D52', 'a. Inner diameter'],
+        ['C53:D53', 'b. Depth hole'],
+        ['E52:G52', 'Ø7 [-0.3 ~ 0]'],
+        ['E53:G53', '8 ±0.3'],
+
+        // Cells 5 bagian kanan 
+        ['I52', '-'],
+        ['J52', 'Caliper'],
+        ['J53', 'Caliper'],
+
+        // Cells 6
+        ['C54:D54', 'Lot Marking'],
+        ['E54:G54', 'Ø7 [-0.3 ~ 0]'],
+
+        // Cells 6 bagian kanan 
+        ['J54', 'Visual'],
+        ['K54:K54', 'OK / NG'],
+        ['L54:L54', 'OK / NG'],
+        ['M54:M54', 'OK / NG'],
+        ['N54:N54', 'OK / NG'],
+        ['O54:O54', 'OK / NG'],
+        ['P54:P54', 'OK / NG'],
+        ['Q54:Q54', 'OK / NG'],
+        ['R54:R54', 'OK / NG'],
+        ['S54:S54', 'OK / NG'],
+
+        // Cells 7
+        ['C55:D55', 'Appearance ex gate'],
+        ['E55:G55', 'Tidak : gompal & keropos'],
+
+        //  Cells 7 bagian kanan 
+        ['J55', 'Visual'],
+        ['K55:K55', 'OK / NG'],
+        ['L55:L55', 'OK / NG'],
+        ['M55:M55', 'OK / NG'],
+        ['N55:N55', 'OK / NG'],
+        ['O55:O55', 'OK / NG'],
+        ['P55:P55', 'OK / NG'],
+        ['Q55:Q55', 'OK / NG'],
+        ['R55:R55', 'OK / NG'],
+        ['S55:S55', 'OK / NG'],
+
+        // Cells 8
+        ['C56:D57', 'Appearance permukaan move'],
+        ['E56:G57', 'Tidak : Retak, undercut, flowline, overheat & gompal.'],
+
+        //  Cells 8 bagian kanan
+        ['J56:J57', 'Visual'],
+        ['K56:K57', 'OK / NG'],
+        ['L56:L57', 'OK / NG'],
+        ['M56:M57', 'OK / NG'],
+        ['N56:N57', 'OK / NG'],
+        ['O56:O57', 'OK / NG'],
+        ['P56:P57', 'OK / NG'],
+        ['Q56:Q57', 'OK / NG'],
+        ['R56:R57', 'OK / NG'],
+        ['S56:S57', 'OK / NG'],
+
+        //  Cells 9
+        ['C59:D59', 'b.Thickness'],
+        ['C60:D60', 'c.Thickness'],
+        ['E59:G59', '11.07 ±0.3'],
+        ['E60:G60', '10.5 (0 ~ +0.3)'],
+
+        //  Cells 9 bagian kanan
+        ['J59', 'Caliper'],
+        ['J60', 'Caliper'],
+    ];
+
+    // Loop tunggal untuk memproses semua sel
+    foreach ($cells as [$range, $text]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(explode(':', $range)[0], $text);
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks horizontal
+                'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks vertikal
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
+            ],
+            'font' => ['bold' => false], // Hapus bold
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
+        ]);
+    }
+
+    $sheet->mergeCells('H74:H116');
+    $sheet->setCellValue('H74', 'All Point If Job Set Up');
+
+    // Styling untuk teks vertikal dan center
+    $sheet->getStyle('H74:H116')->applyFromArray([
+        'alignment' => [
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Pusatkan secara horizontal
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER, // Pusatkan secara vertikal
+            'textRotation' => 90 // Putar teks 90 derajat (vertikal)
+        ],
+        'font' => [
+            'bold' => true
+        ],
+        'borders' => [
+            'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+        ]
+    ]);
+
+
+
 } catch (\Exception $e) {
     die('Error: ' . $e->getMessage());
 }
