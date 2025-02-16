@@ -414,16 +414,21 @@ try {
         ['J60', 'Caliper'],
     ];
 
-    // Loop tunggal untuk memproses semua sel
     foreach ($cells as [$range, $text]) {
         $sheet->mergeCells($range);
         $sheet->setCellValue(explode(':', $range)[0], $text);
 
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
+        // Cek apakah sel termasuk dalam kolom C:D
+        preg_match('/^C\d+:D\d+$/', $range) ? $alignment = [
+            'horizontal' => Alignment::HORIZONTAL_LEFT, // Rata kiri
+            'vertical' => Alignment::VERTICAL_CENTER // Tengah secara vertikal
+        ] : $alignment = [
                 'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks horizontal
                 'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks vertikal
-            ],
+            ];
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => $alignment,
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
                 'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
@@ -432,6 +437,7 @@ try {
             'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
         ]);
     }
+
 
     // Merge kolom H35:H60
     $sheet->mergeCells('H35:H60');
@@ -619,7 +625,7 @@ try {
     $sheet->getStyle('A68:S70')->applyFromArray([
         'borders' => [
             'outline' => [
-                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
             ],
             'inside' => [
                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
@@ -1020,11 +1026,17 @@ try {
         $sheet->mergeCells($range);
         $sheet->setCellValue(explode(':', $range)[0], $text);
 
-        $sheet->getStyle($range)->applyFromArray([
-            'alignment' => [
+        // Cek apakah sel termasuk dalam kolom C:D
+        preg_match('/^C\d+:D\d+$/', $range) ? $alignment = [
+            'horizontal' => Alignment::HORIZONTAL_LEFT, // Rata kiri
+            'vertical' => Alignment::VERTICAL_CENTER // Tengah secara vertikal
+        ] : $alignment = [
                 'horizontal' => Alignment::HORIZONTAL_CENTER, // Pusatkan teks horizontal
                 'vertical' => Alignment::VERTICAL_CENTER // Pusatkan teks vertikal
-            ],
+            ];
+
+        $sheet->getStyle($range)->applyFromArray([
+            'alignment' => $alignment,
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
                 'startColor' => ['rgb' => 'FFFFFF'] // Warna putih
@@ -1084,6 +1096,16 @@ try {
             'borders' => ['allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]]
         ]);
     }
+
+    //  border di sekitar range A32:S62
+    $sheet->getStyle('A63:S121')->applyFromArray([
+        'borders' => [
+            'outline' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+            ]
+        ]
+    ]);
+    $spreadsheet->getDefaultStyle()->getFont()->setSize(12);
 
 
 } catch (\Exception $e) {
