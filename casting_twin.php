@@ -5,6 +5,7 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -34,7 +35,7 @@ $sheet = $spreadsheet->getActiveSheet();
 $sheet->setTitle('Check Sheet');
 
 // ======================== PAGE 1 ===============
-
+// --------------------- Bagian 1 ------------- 
 try {
     // Set column widths
     $columnWidths = ['A' => 5, 'B' => 20, 'C' => 30, 'D' => 15, 'E' => 15, 'F' => 15, 'G' => 15, 'H' => 15, 'I' => 15, 'J' => 15, 'K' => 15, 'L' => 15, 'M' => 15, 'N' => 15, 'O' => 15, 'P' => 15, 'Q' => 15, 'R' => 15, 'S' => 15];
@@ -129,12 +130,6 @@ try {
         }
     }
 
-    // Apply styling
-    $boldCells = ["A5", "D6", "D7", "D8", "K6", "K7", "P1", "P3", "R3", "A35", "A40", "A47", "A49", "A52", "A54", "A55", "56"];
-    foreach ($boldCells as $cell) {
-        $sheet->getStyle($cell)->applyFromArray(['font' => ['bold' => true]]);
-    }
-
     $centerCells = ["P1"];
     foreach ($centerCells as $cell) {
         $sheet->getStyle($cell)->applyFromArray($textCenter);
@@ -154,7 +149,7 @@ try {
     ]);
     $spreadsheet->getDefaultStyle()->getFont()->setSize(12);
 
-    // ====================== PAGE 2 =====================
+    // --------------------------- BAGIAN 2 -----------------------
     // Daftar header tabel dengan merge cells
     $tableHeaders = [
         'A32:B33' => 'No.',
@@ -198,7 +193,7 @@ try {
 
     // Daftar judul bagian dan rentang selnya
     $sections = [
-        ['A34:S34', ''],
+        ['A34:S34', '   I. LUBANG & INSERT PIN AREA MOVE'],
         ['A58:G58', 'II. LUBANG & INSERT PIN AREA CORE 1'],
         ['I58:S58', '']
     ];
@@ -486,7 +481,6 @@ try {
 
     // Daftar range yang akan diberikan border
     $ranges = ['K36:S39', 'K40:S41', 'K42:S43', 'K45:S46', 'K47:S48', 'K49:S49', 'K52:S53', 'K59:S60'];
-
     // Terapkan border dan alignment ke setiap range
     foreach ($ranges as $range) {
         $sheet->getStyle($range)->applyFromArray([
@@ -501,6 +495,137 @@ try {
             ]
         ]);
     }
+
+    // ==================================== PAGE 2 ====================
+// --------------------- Bagian 1 ------------- 
+
+    // Set column widths
+    $columnWidths = [
+        'A' => 5,
+        'B' => 20,
+        'C' => 30,
+        'D' => 15,
+        'E' => 15,
+        'F' => 15,
+        'G' => 15,
+        'H' => 15,
+        'I' => 15,
+        'J' => 15,
+        'K' => 15,
+        'L' => 15,
+        'M' => 15,
+        'N' => 15,
+        'O' => 15,
+        'P' => 15,
+        'Q' => 15,
+        'R' => 15,
+        'S' => 15
+    ];
+    foreach ($columnWidths as $col => $width) {
+        $sheet->getColumnDimension($col)->setWidth($width);
+    }
+
+    // Set row heights
+    $rowHeights = [1 => 15, 2 => 30, 3 => 30, 5 => 25];
+    foreach ($rowHeights as $row => $height) {
+        $sheet->getRowDimension($row)->setRowHeight($height);
+    }
+
+    // // Set logo
+    $logoPath = __DIR__ . '/gambar.jpg'; // Pastikan path benar
+    if (file_exists($logoPath)) {
+        // Merge area untuk gambar
+        $sheet->mergeCells('A63:E66');
+
+        // Sesuaikan ukuran gambar agar ringkas
+        $drawing = new Drawing();
+        $drawing->setName('Company Logo');
+        $drawing->setDescription('Company Logo');
+        $drawing->setPath($logoPath);
+        $drawing->setCoordinates('A63');
+        $drawing->setWidth(480); // Atur lebar gambar secara proporsional
+        $drawing->setHeight(70); // Sesuaikan tinggi gambar
+        $drawing->setOffsetX(5);
+        $drawing->setOffsetY(5);
+        $drawing->setWorksheet($sheet);
+    }
+
+    // Set title
+    $sheet->mergeCells("F63:O67");
+    $sheet->setCellValue('F63', 'CHECK SHEET VERIFIKASI JOB SET UP & PATROL CASTING');
+    $sheet->getStyle("F63")->applyFromArray($titleStyle);
+
+    // Set form header
+    $sheet->mergeCells("A67:C67");
+    $sheet->setCellValue('A67', 'FORM');
+    $sheet->getStyle("A67")->applyFromArray([
+        'font' => ['bold' => true, 'size' => 14],
+        'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER]
+    ]);
+
+    // Set header data
+    $headers = [
+        ['P63:S63', 'F0/QAS/Q1/1907'],
+        ['P64:Q64', 'Revisi'],
+        ['P65:Q65', '0'],
+        ['R64:S64', 'Hal'],
+        ['R65:S65', '2 / 3'],
+        ['P66:S67', 'Berlaku mulai: 04 November 2020']
+    ];
+
+    foreach ($headers as [$range, $value]) {
+        $sheet->mergeCells($range);
+        $sheet->setCellValue(substr($range, 0, strpos($range, ':')), $value);
+    }
+    $sheet->getStyle("P63:S67")->applyFromArray($textCenter);
+
+    // Set table header
+    $tableData = [
+        ['A68' => 'Nama part', 'D68' => 'TWIN HEAD', 'J68' => 'Custom', 'K68' => 'PT. DNP', 'P68' => 'Nama mesin'],
+        ['A69' => 'No. part', 'D69' => 'P332204-6910B', 'J69' => 'Model', 'K69' => '4D34G', 'P69' => 'No. mesin'],
+        ['A70' => 'Code', 'D70' => 'AV – 1', 'J70' => 'No. die', 'P70' => 'No. jig'],
+    ];
+
+    foreach ($tableData as $row) {
+        foreach ($row as $cell => $value) {
+            $sheet->setCellValue($cell, $value);
+        }
+    }
+
+    // Merge cells untuk keterangan
+    $sheet->mergeCells('A71:S71');
+    $sheet->setCellValue('A71', 'Keterangan: Untuk Job Set up, diambil sample 1 pcs / jig untuk pemeriksaan awal.');
+    $sheet->getStyle("A71")->applyFromArray([
+        'font' => ['size' => 10, 'underline' => Font::UNDERLINE_SINGLE],
+        'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
+    ]);
+
+    // Apply styling ke teks tertentu
+    $boldCells = ["A5", "D6", "D7", "D8", "K6", "K7", "P1", "P3", "R3", "A35", "A40", "A47", "A49", "A52", "A54", "A55", "D68", "D69", "D70", "K68", "K69", "P63", "P64", "P65", "R64", "R65"];
+    foreach ($boldCells as $cell) {
+        $sheet->getStyle($cell)->applyFromArray(['font' => ['bold' => true]]);
+    }
+
+    // Apply border sesuai kolom
+    $sheet->getStyle("A63:S71")->applyFromArray([
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+            ]
+        ]
+    ]);
+
+    // Atur border untuk tabel utama
+    $sheet->getStyle('A68:S70')->applyFromArray([
+        'borders' => [
+            'outline' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM
+            ],
+            'inside' => [
+                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+            ]
+        ]
+    ]);
 
 } catch (\Exception $e) {
     die('Error: ' . $e->getMessage());
