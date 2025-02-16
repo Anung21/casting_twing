@@ -1297,6 +1297,19 @@ try {
         ['J136', 'CMM'],
         ['J137', 'CMM'],
 
+        // Footer cells 
+        ['A170:J170', 'Keputusan'],
+        ['K170', 'OK / NG'],
+        ['L170', 'OK / NG'],
+        ['M170', 'OK / NG'],
+        ['N170', 'OK / NG'],
+        ['O170', 'OK / NG'],
+        ['P170', 'OK / NG'],
+        ['Q170', 'OK / NG'],
+        ['R170', 'OK / NG'],
+        ['S170', 'OK / NG'],
+
+
     ];
 
     // Loop tunggal untuk memproses semua sel
@@ -1341,8 +1354,18 @@ try {
             'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
         ]
     ]);
+    $sheet->getStyle('A138:S169')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_MEDIUM]
+        ]
+    ]);
 
-
+    // Memberikan border untuk setiap sel dalam range A138:S169
+    $sheet->getStyle('A138:S169')->applyFromArray([
+        'borders' => [
+            'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+        ]
+    ]);
 
     // EXTERNAL SYLING
     // Apply styling ke teks tertentu
@@ -1401,6 +1424,10 @@ try {
         "D127",
         "D128",
         "D129",
+        "A133",
+        "A134",
+        "A137",
+        "A170",
 
     ];
     foreach ($boldCells as $cell) {
