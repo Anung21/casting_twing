@@ -652,7 +652,7 @@ try {
         ]
     ];
 
-    // Memberikan border untuk setiap kolom di baris K33:S33
+    // Memberikan border untuk setiap kolom di baris K73:S73
     for ($col = 'K'; $col <= 'S'; $col++) {
         $cell = $col . '73';
         $sheet->getStyle($cell)->applyFromArray([
@@ -941,6 +941,78 @@ try {
         ['R102', 'OK / NG'],
         ['S102', 'OK / NG'],
 
+        // Cells 23
+        ['C103:D106', 'a. Inner diameter(4plcs)'],
+        ['C107:D110', 'b. Depth hole (4plcs)'],
+        ['C111:D111', ' c. Appearance hole'],
+        ['E103:F103', 'Ø4.5 [-0.3 ~ 0]'],
+        ['E104:F104', 'Ø4.5 [-0.3 ~ 0]'],
+        ['E105:F105', 'Ø4.5 [-0.3 ~ 0]'],
+        ['E106:F106', 'Ø4.5 [-0.3 ~ 0]'],
+        ['G103', '1'],
+        ['G104', '2'],
+        ['G105', '3'],
+        ['G106', '4'],
+        ['E107:F107', '12.5 ±0.3'],
+        ['E108:F108', '12.5 ±0.3'],
+        ['E109:F109', '12.5 ±0.3'],
+        ['E110:F110', '12.5 ±0.3'],
+        ['G107', '1'],
+        ['G108', '2'],
+        ['G109', '3'],
+        ['G110', '4'],
+        ['E111:G111', 'Tidak : undercut, overheat, patah.'],
+
+        // Cells 23 bagian kanan
+        ['I103', '-'],
+        ['I104', '-'],
+        ['I105', '-'],
+        ['I106', '-'],
+        ['J103:J106', 'Caliper'],
+        ['J107:J110', 'Caliper'],
+        ['J111', 'Visual'],
+        ['K111', 'OK / NG'],
+        ['L111', 'OK / NG'],
+        ['M111', 'OK / NG'],
+        ['N111', 'OK / NG'],
+        ['O111', 'OK / NG'],
+        ['P111', 'OK / NG'],
+        ['Q111', 'OK / NG'],
+        ['R111', 'OK / NG'],
+        ['S111', 'OK / NG'],
+
+        // Cells 24
+        ['C112:D113', ' Appearance permukaan fix'],
+        ['E112:G113', 'Tidak : Retak, undercut, flowline, overheat & gompal.'],
+
+        // Cells 24 bagian kanan
+        ['J112:J113', 'Visual'],
+        ['K112:K113', 'OK / NG'],
+        ['L112:L113', 'OK / NG'],
+        ['M112:M113', 'OK / NG'],
+        ['N112:N113', 'OK / NG'],
+        ['O112:O113', 'OK / NG'],
+        ['P112:P113', 'OK / NG'],
+        ['Q112:Q113', 'OK / NG'],
+        ['R112:R113', 'OK / NG'],
+        ['S112:S113', 'OK / NG'],
+
+        // Cells 25
+        ['C115:D116', ' Test Cutting'],
+        ['E115:G116', 'Mach. OK, porosity sesuai standard'],
+
+        // Cells 25 bagian kanan
+        ['J115:J116', 'Machining Test'],
+        ['K115:K116', 'OK / NG'],
+        ['L115:L116', 'OK / NG'],
+        ['M115:M116', 'OK / NG'],
+        ['N115:N116', 'OK / NG'],
+        ['O115:O116', 'OK / NG'],
+        ['P115:P116', 'OK / NG'],
+        ['Q115:Q116', 'OK / NG'],
+        ['R115:R116', 'OK / NG'],
+        ['S115:S116', 'OK / NG'],
+
     ];
 
     // Loop tunggal untuk memproses semua sel
@@ -981,13 +1053,20 @@ try {
     ]);
 
     $mergeCells = [
-        'I35:I39' => '1x / Shift',
-        'I44:I46' => '1x / Shift',
-        'I47:I48' => '1x / Shift',
+        'I74:I78' => '1x / Shift',
+        'I80:I81' => '1x / Shift',
+        'I82:I84' => '1x / Shift',
         'I50:I51' => '1x / Shift',
-        'I53:I55' => '1x / Shift',
-        'I56:I57' => '1x / Shift',
-        'I59:I60' => '1x / Shift',
+        'I87' => '1x / Shift',
+        'I89' => '1x / Shift',
+        'I90:I91' => '1x / Shift',
+        'I94' => '1x / Shift',
+        'I95:I96' => '1x / Shift',
+        'I98' => '1x / Shift',
+        'I100:I102' => '1x / Shift',
+        'I107:I111' => '1x / Shift',
+        'I112:I113' => '1x / Shift',
+        'I115:I116' => '1x / Shift',
 
     ];
 
@@ -1005,6 +1084,7 @@ try {
             'borders' => ['allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]]
         ]);
     }
+
 
 } catch (\Exception $e) {
     die('Error: ' . $e->getMessage());
