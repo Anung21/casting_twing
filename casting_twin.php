@@ -11,7 +11,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 // Set Nama File
-$fileName = "Casting_Twin_H.xlsx";
+$fileName = "Casting_Twin.xlsx";
 
 // Styling arrays
 $titleStyle = [
@@ -1316,9 +1316,7 @@ try {
         ['D180', '03/11/2020'],
         ['D181', '04/11/2020'],
         ['E178:J178', 'Tanda Tangan/Nama'],
-        // ['E179:J179', 'Bambang H.'],
-        // ['E180:J180', 'Haryanto / Krist.'],
-        // ['E181:J181', 'Andi S.'],
+        ['F176:J177', ' Diperiksa Foreman 1x / day'],
 
     ];
 
@@ -1349,7 +1347,7 @@ try {
     $sheet->getStyle("A179")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
     $sheet->getStyle("A180")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
     $sheet->getStyle("A181")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-
+    $sheet->getStyle("F176")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
 
     $sheet->mergeCells('H133:H137');
     $sheet->setCellValue('H133', 'All Point If Job Set Up');
@@ -1368,18 +1366,39 @@ try {
             'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
         ]
     ]);
-    $sheet->getStyle('A138:S169')->applyFromArray([
-        'borders' => [
-            'outline' => ['borderStyle' => Border::BORDER_MEDIUM]
-        ]
-    ]);
 
-    // Memberikan border untuk setiap sel dalam range A138:S169
-    $sheet->getStyle('A138:S169')->applyFromArray([
-        'borders' => [
-            'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
-        ]
-    ]);
+    // Mengatur border untuk beberapa range sel
+    $ranges = [
+        'A138:B169',
+        'C138:D169',
+        'E138:G169',
+        'H138:H169',
+        'J138:J169',
+        'K138:K169',
+        'L138:L169',
+        'M138:M169',
+        'N138:N169',
+        'O138:O169',
+        'P138:P169',
+        'Q138:Q169',
+        'R138:R169',
+        'S138:S169'
+    ];
+
+    foreach ($ranges as $range) {
+        $sheet->getStyle($range)->applyFromArray([
+            'borders' => [
+                'outline' => ['borderStyle' => Border::BORDER_THIN]
+            ]
+        ]);
+    }
+
+
+    // 
+    // 
+    // 
+    // 
+
 
     // ---------------------------- Bagian 3 --------------------------------------- 
 
@@ -1389,15 +1408,30 @@ try {
     $sheet->getStyle("A171")->applyFromArray($titleStyle);
     $sheet->getStyle("A171")->getFont()->setBold(false);
 
+    $sheet->getStyle("A71")->getFont()->setSize(12);
+    $sheet->getStyle("A71")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("A71")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
     $sheet->getStyle('A171:E174')->applyFromArray([
         'borders' => [
             'outline' => ['borderStyle' => Border::BORDER_THIN]
         ]
     ]);
 
-    $sheet->getStyle("A171")->getFont()->setSize(12);
-    $sheet->getStyle("A171")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-    $sheet->getStyle("A171")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+    $sheet->mergeCells("K178");
+    $sheet->setCellValue("K178", 'Catatan :');
+    $sheet->getStyle("K178")->applyFromArray($titleStyle);
+    $sheet->getStyle("K178")->getFont()->setBold(false);
+
+    $sheet->getStyle('K178:S181')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+    $sheet->getStyle("K178")->getFont()->setSize(12);
+    $sheet->getStyle("K178")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("K178")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
     $sheet->mergeCells('B172:C172');
     $sheet->setCellValue('B172', '1. Dimensi ditulis dengan jelas.');
@@ -1419,35 +1453,53 @@ try {
     $sheet->getStyle("A175")->applyFromArray($titleStyle);
     $sheet->getStyle("A175")->getFont()->setBold(false);
 
+    // Border marge kosong bagian 3 
     $sheet->getStyle('A175:E177')->applyFromArray([
         'borders' => [
             'outline' => ['borderStyle' => Border::BORDER_THIN]
         ]
     ]);
 
-    // 
-    $sheet->setCellValue('G179', 'Bambang H.');
-    $sheet->getStyle('E179:J179')->applyFromArray([
+    $sheet->getStyle('K176:S177')->applyFromArray([
         'borders' => [
-            'outline' => ['borderStyle' => Border::BORDER_THIN]
+            'outline' => ['borderStyle' => Border::BORDER_THIN],
         ]
     ]);
 
-    $sheet->setCellValue('G180', 'Haryanto / Krist.');
-    $sheet->getStyle('E180:J180')->applyFromArray([
-        'borders' => [
-            'outline' => ['borderStyle' => Border::BORDER_THIN]
-        ]
-    ]);
+    // Keterangan
+    $data = [
+        'F171' => 'Tanggal inspeksi',
+        'F172' => 'Shift',
+        'F173' => 'Proses',
+        'F174' => 'Lot tanggal casting',
+        'F175' => 'Diukur'
+    ];
 
-    $sheet->setCellValue('G181', 'Andi S.');
-    $sheet->getStyle('E181:J181')->applyFromArray([
-        'borders' => [
-            'outline' => ['borderStyle' => Border::BORDER_THIN]
-        ]
-    ]);
+    foreach ($data as $cell => $text) {
+        $sheet->setCellValue($cell, $text);
+        $sheet->getStyle("$cell:J" . substr($cell, 1))->applyFromArray([
+            'borders' => [
+                'outline' => ['borderStyle' => Border::BORDER_THIN]
+            ]
+        ]);
+    }
 
+    // Nama tanda tangan
+    $signatures = [
+        'G179' => 'Bambang H.',
+        'G180' => 'Haryanto / Krist.',
+        'G181' => 'Andi S.'
+    ];
 
+    foreach ($signatures as $cell => $name) {
+        $sheet->setCellValue($cell, $name);
+        $row = substr($cell, 1); // Ambil nomor baris dari sel
+        $sheet->getStyle("E{$row}:J{$row}")->applyFromArray([
+            'borders' => [
+                'outline' => ['borderStyle' => Border::BORDER_THIN]
+            ]
+        ]);
+    }
 
     $sheet->getStyle("A175")->getFont()->setSize(12);
     $sheet->getStyle("A175")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
@@ -1557,7 +1609,26 @@ try {
     }
 
     // Daftar range yang akan diberikan border
-    $ranges = ['K36:S39', 'K40:S41', 'K42:S43', 'K45:S46', 'K47:S48', 'K49:S49', 'K52:S53', 'K59:S60', 'K74:S76', 'K79:S79', 'K80:S80', 'K86:S89', 'K92:S94', 'K99:S100', 'K103:S110', 'K59:S60', 'K133:S137'];
+    $ranges = [
+        'K36:S39',
+        'K40:S41',
+        'K42:S43',
+        'K45:S46',
+        'K47:S48',
+        'K49:S49',
+        'K52:S53',
+        'K59:S60',
+        'K74:S76',
+        'K79:S79',
+        'K80:S80',
+        'K86:S89',
+        'K92:S94',
+        'K99:S100',
+        'K103:S110',
+        'K59:S60',
+        'K133:S137',
+        'K171:S175'
+    ];
     // Terapkan border dan alignment ke setiap range
     foreach ($ranges as $range) {
         $sheet->getStyle($range)->applyFromArray([
