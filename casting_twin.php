@@ -1308,7 +1308,17 @@ try {
         ['Q170', 'OK / NG'],
         ['R170', 'OK / NG'],
         ['S170', 'OK / NG'],
-
+        ['A179:C179', 'Dibuat'],
+        ['A180:C180', 'Diperiksa'],
+        ['A181:C181', 'Disetujui'],
+        ['D178', 'Tanggal'],
+        ['D179', '2/11/2020'],
+        ['D180', '03/11/2020'],
+        ['D181', '04/11/2020'],
+        ['E178:J178', 'Tanda Tangan/Nama'],
+        // ['E179:J179', 'Bambang H.'],
+        // ['E180:J180', 'Haryanto / Krist.'],
+        // ['E181:J181', 'Andi S.'],
 
     ];
 
@@ -1336,6 +1346,10 @@ try {
             'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
         ]);
     }
+    $sheet->getStyle("A179")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("A180")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("A181")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+
 
     $sheet->mergeCells('H133:H137');
     $sheet->setCellValue('H133', 'All Point If Job Set Up');
@@ -1366,6 +1380,111 @@ try {
             'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
         ]
     ]);
+
+    // ---------------------------- Bagian 3 --------------------------------------- 
+
+    // Set marge keterangan-gambar 171
+    $sheet->mergeCells("A171:B171");
+    $sheet->setCellValue("A171", 'Keterangan :');
+    $sheet->getStyle("A171")->applyFromArray($titleStyle);
+    $sheet->getStyle("A171")->getFont()->setBold(false);
+
+    $sheet->getStyle('A171:E174')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+    $sheet->getStyle("A171")->getFont()->setSize(12);
+    $sheet->getStyle("A171")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("A171")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+    $sheet->mergeCells('B172:C172');
+    $sheet->setCellValue('B172', '1. Dimensi ditulis dengan jelas.');
+    $sheet->getStyle("B172")->applyFromArray([
+        'font' => ['size' => 10, 'underline' => Font::UNDERLINE_SINGLE],
+        'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
+    ]);
+
+    $sheet->mergeCells('B173:C173');
+    $sheet->setCellValue('B173', '2. Visual : Lingkari OK / NG.');
+    $sheet->getStyle("B173")->applyFromArray([
+        'font' => ['size' => 10, 'underline' => Font::UNDERLINE_SINGLE],
+        'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
+    ]);
+
+    // Set marge keterangan-gambar 175
+    $sheet->mergeCells("A175:B175");
+    $sheet->setCellValue("A175", ' Proses :');
+    $sheet->getStyle("A175")->applyFromArray($titleStyle);
+    $sheet->getStyle("A175")->getFont()->setBold(false);
+
+    $sheet->getStyle('A175:E177')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+    // 
+    $sheet->setCellValue('G179', 'Bambang H.');
+    $sheet->getStyle('E179:J179')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+    $sheet->setCellValue('G180', 'Haryanto / Krist.');
+    $sheet->getStyle('E180:J180')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+    $sheet->setCellValue('G181', 'Andi S.');
+    $sheet->getStyle('E181:J181')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+
+
+    $sheet->getStyle("A175")->getFont()->setSize(12);
+    $sheet->getStyle("A175")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+    $sheet->getStyle("A175")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+    // Code E175
+    $sheet->mergeCells("E175");
+    $sheet->setCellValue("E175", 'Code :');
+    $sheet->getStyle("E175")->applyFromArray($titleStyle);
+    $sheet->getStyle("E175")->getFont()->setBold(false);
+
+    $sheet->getStyle("E175")->getFont()->setSize(12);
+    $sheet->getStyle("E175")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+    $sheet->getStyle("E175")->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+    //  Test kolom border pinggir
+    $sheet->getStyle('A178:C178')->applyFromArray([
+        'borders' => [
+            'outline' => ['borderStyle' => Border::BORDER_THIN]
+        ]
+    ]);
+
+    //  title
+    $sheet->mergeCells('B176');
+    $sheet->setCellValue('B176', '- Verifikasi job setup');
+    $sheet->getStyle("B176")->applyFromArray([
+        'font' => ['size' => 10, 'underline' => Font::UNDERLINE_SINGLE],
+        'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
+    ]);
+
+    $sheet->mergeCells('B177');
+    $sheet->setCellValue('B177', '- Normal');
+    $sheet->getStyle("B177")->applyFromArray([
+        'font' => ['size' => 10, 'underline' => Font::UNDERLINE_SINGLE],
+        'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
+    ]);
+
 
     // EXTERNAL SYLING
     // Apply styling ke teks tertentu
@@ -1428,6 +1547,9 @@ try {
         "A134",
         "A137",
         "A170",
+        "G179",
+        "G180",
+        "G181",
 
     ];
     foreach ($boldCells as $cell) {
