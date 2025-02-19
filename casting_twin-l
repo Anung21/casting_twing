@@ -1,0 +1,32 @@
+<?php
+
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+
+// Set Nama File
+$fileName = "Casting_twin_loop";
+
+$dataParentArray = [
+    'idsurat' => '',
+    'revisi' => '',
+    'hal' => '',
+    'berlakuform' => '',
+    'namapart' => '',
+    'noPart' => '',
+    'code' => '',
+    'customer' => '',
+    'model' => '',
+    'nodie' => '',
+    'namamesin' => '',
+    'nomesin' => '',
+    'nojig' => '',
+    'jenisPengecekan' => '',
+];
+
