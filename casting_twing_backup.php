@@ -1602,6 +1602,8 @@ try {
         "G179",
         "G180",
         "G181",
+        "K127",
+        "K128"
 
     ];
     foreach ($boldCells as $cell) {
