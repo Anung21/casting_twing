@@ -25,18 +25,18 @@ ini_set('memory_limit', '-1');
 /* collect to array */
 $dataParentArray = [
     'idsurat' => 'n/a',
-    'revisi' => 'n/a',
-    'hal' => 'n/a',
-    'berlakuForm' => 'n/a',
-    'namaPart' => 'n/a',
-    'noPart' => 'n/a',
-    'code' => 'n/a',
-    'customer' => 'n/a',
-    'model' => 'n/a',
-    'noDie' => 'n/a',
-    'namaMesin' => 'n/a',
-    'noMesin' => 'n/a',
-    'noJig' => 'n/a',
+    'revisi' => '0',
+    'hal' => '1/3',
+    'berlakuForm' => '04 November 2020',
+    'namaPart' => ' TWIN HEAD',
+    'noPart' => '  P332204–710B',
+    'code' => ' AV-1',
+    'customer' => ' PT. DNP',
+    'model' => ' 4D34G',
+    'noDie' => '',
+    'namaMesin' => '',
+    'noMesin' => '',
+    'noJig' => '',
 ];
 
 /* Buat Spreadsheet */
@@ -75,14 +75,14 @@ try {
     $sheet->setCellValue('B2', '');
 
     /* set judul */
-    $sheet->mergeCells("Q5:S6")->setCellValue('Q5', "Berlaku mulai :  $dataParentArray[berlakuForm].");
+    $sheet->mergeCells("Q5:T6")->setCellValue('Q5', "Berlaku mulai :  $dataParentArray[berlakuForm].");
     $sheet->mergeCells("G2:P6")->setCellValue('G2', "CHECK SHEET VERIFIKASI  JOB SET UP & PATROL CASTING ");
-    $sheet->mergeCells("B2:F2")->setCellValue('B2', 'FORM');
+    $sheet->mergeCells("B6:F6")->setCellValue('B6', 'FORM');
     $sheet->mergeCells("S3:T3")->setCellValue('S3', "Hal");
     $sheet->mergeCells("S4:T4")->setCellValue('S4', "$dataParentArray[hal]");
     $sheet->mergeCells("Q3:R3")->setCellValue('Q3', "Revisi");
-    $sheet->mergeCells("S4:T4")->setCellValue('S4', "$dataParentArray[revisi]");
-    $sheet->mergeCells("Q2:T2")->setCellValue('Q2', 'FO/QAS/Q1/1907s');
+    $sheet->mergeCells("Q4:R4")->setCellValue('Q4', "$dataParentArray[revisi]");
+    $sheet->mergeCells("Q2:T2")->setCellValue('Q2', 'FO/QAS/Q1/1907');
     $sheet->mergeCells("B7:D7")->setCellValue('B7', 'Nama part');
     $sheet->mergeCells("B8:D8")->setCellValue('B8', 'No. part');
     $sheet->mergeCells("B9:D9")->setCellValue('B9', 'Code');
@@ -95,15 +95,15 @@ try {
     $sheet->mergeCells("Q9:R9")->setCellValue('Q9', 'No. jig');
 
     /* isi untuk judul or header */
-    $sheet->mergeCells("E7:J7")->setCellValue('E7', '$dataParentArray[nama_part]');
-    $sheet->mergeCells("E8:J8")->setCellValue('E8', '$dataPerentArray[no_part]');
-    $sheet->mergeCells("E9:J9")->setCellValue('E9', '$dataPerentArray[code]');
-    $sheet->mergeCells("L7:P7")->setCellValue('L7', '$dataPerentArray[customer]');
-    $sheet->mergeCells("L8:P8")->setCellValue('L8', '$dataPerentArray[model]');
-    $sheet->mergeCells("L9:P9")->setCellValue('L9', '$dataPerentArray[no_die]');
-    $sheet->mergeCells("S7:T7")->setCellValue('S7', '$dataPerentArray[nama_mesin]');
-    $sheet->mergeCells("S8:T8")->setCellValue('S8', '$dataPerentArray[no_mesin]');
-    $sheet->mergeCells("S9:T9")->setCellValue('S9', '$dataPerentArray[nama_jig]');
+    $sheet->mergeCells("E7:J7")->setCellValue('E7', "$dataParentArray[namaPart]");
+    $sheet->mergeCells("E8:J8")->setCellValue('E8', "$dataParentArray[noPart]");
+    $sheet->mergeCells("E9:J9")->setCellValue('E9', "$dataParentArray[code]");
+    $sheet->mergeCells("L7:P7")->setCellValue('L7', "$dataParentArray[customer]");
+    $sheet->mergeCells("L8:P8")->setCellValue('L8', "$dataParentArray[model]");
+    $sheet->mergeCells("L9:P9")->setCellValue('L9', "$dataParentArray[noDie]");
+    $sheet->mergeCells("S7:T7")->setCellValue('S7', "$dataParentArray[namaMesin]");
+    $sheet->mergeCells("S8:T8")->setCellValue('S8', "$dataParentArray[noMesin]");
+    $sheet->mergeCells("S9:T9")->setCellValue('S9', "$dataParentArray[noJig]");
 
     // $sheet->mergeCells("F8:M8")->setCellValue('F8', "$dataParentArray[material]"); /* model/dies/cavity */
     // $sheet->mergeCells("F9:M9")->setCellValue('F9', "$dataParentArray[qty]"); /* Quantity */
@@ -208,7 +208,7 @@ try {
     /* === Set Footer page 1 === */
 
     /* push array to style */
-    array_push($boldCells, "B13:T14", "F2", "Q2", "S2", "Q3", "S3", "Q4", "O6", "Q6", "S6", "N7", "N8", "N11", "N12", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12");
+    array_push($boldCells, "B13:T14", "F2", "Q2", "S2", "Q3", "S3", "Q4", "O6", "Q6", "S6", "N7", "N8", "N11", "N12", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "K7", "K8", "K9", "Q7", "Q8", "Q9", "G2", "G74", "K78", "K79", "K80", );
     array_push($boldCells, "B" . ($footerStartRow + 5), "B" . ($footerStartRow + 6), "B" . ($footerStartRow + 7), "D" . ($footerStartRow + 4), "F" . ($footerStartRow + 4), "I" . ($footerStartRow + 4), "L" . ($footerStartRow + 4), "N" . ($footerStartRow + 4), "R" . ($footerStartRow + 0), "R" . ($footerStartRow + 1), "R" . ($footerStartRow + 2), "Q" . ($footerStartRow + 3), "Q" . ($footerStartRow + 4), "S" . ($footerStartRow + 4));
     array_push($centerCells, "F2", "B13:T14", "Q2", "Q3", "Q4", "S3", "S2", "Q3", "Q4", "O6", "Q6", "S6", "N7", "N8", "N11");
     array_push($centerCells, "D" . ($footerStartRow + 4), "F" . ($footerStartRow + 4), "I" . ($footerStartRow + 4), "L" . ($footerStartRow + 4), "N" . ($footerStartRow + 4), "Q" . ($footerStartRow + 3), "Q" . ($footerStartRow + 4), "S" . ($footerStartRow + 4));
@@ -219,19 +219,19 @@ try {
     array_push($ColoumsHeaderTable, "B13:T14");
 
     $rowPageTerakhir = ($approvalStartRow + 3); // Baris terakhir dari page 1 (72)
-    $latestRow = $rowPageTerakhir;
+    $latestRow = $rowPageTerakhir; // NILAINYA 72
 
     for ($page = 2; $page <= $jumlahPage; $page++) {
 
         /* === set new header to page 2 === */
-        $pembatasAtas = $latestRow + 1;
+        $pembatasAtas = $latestRow + 1; // NILAI 73
         $sheet->getRowDimension($pembatasAtas)->setRowHeight(10);
         $sheet->mergeCells("B" . ($pembatasAtas) . ":T" . ($pembatasAtas));
 
-        $startsHeaderPage = $pembatasAtas + 1;
+        $startsHeaderPage = $pembatasAtas + 1; // 74
 
         /* set logo */
-        $sheet->mergeCells("B" . $startsHeaderPage . ":E" . ($startsHeaderPage + 2));
+        $sheet->mergeCells("B" . $startsHeaderPage . ":F" . ($startsHeaderPage + 2));
         $drawing = new Drawing();
         $drawing->setName('Company Logo');
         $drawing->setDescription('Company Logo');
@@ -241,24 +241,24 @@ try {
         $sheet->setCellValue('B' . $startsHeaderPage, '');
 
         /* set judul */
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 3) . ":S" . ($startsHeaderPage + 3))->setCellValue('Q' . ($startsHeaderPage + 3), "Form berlaku mulai $dataParentArray[berlakuForm].");
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 3) . ":T" . ($startsHeaderPage + 3))->setCellValue('Q' . ($startsHeaderPage + 3), "Berlaku mulai : $dataParentArray[berlakuForm].");
         $sheet->mergeCells("G" . ($startsHeaderPage + 0) . ":P" . ($startsHeaderPage + 3))->setCellValue('G' . ($startsHeaderPage + 0), "CHECK SHEET VERIFIKASI JOB SET UP & PATROL CASTING");
-        $sheet->mergeCells("B" . ($startsHeaderPage + 0) . ":F" . ($startsHeaderPage + 0))->setCellValue('B' . ($startsHeaderPage + 0), 'FORM');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 3) . ":F" . ($startsHeaderPage + 3))->setCellValue('B' . ($startsHeaderPage + 3), 'FORM');
         $sheet->mergeCells("S" . ($startsHeaderPage + 1) . ":T" . ($startsHeaderPage + 1))->setCellValue('S' . ($startsHeaderPage + 1), "Hal");
         $sheet->mergeCells("S" . ($startsHeaderPage + 2) . ":T" . ($startsHeaderPage + 2))->setCellValue('S' . ($startsHeaderPage + 2), "$dataParentArray[hal]");
         $sheet->mergeCells("Q" . ($startsHeaderPage + 1) . ":R" . ($startsHeaderPage + 1))->setCellValue('Q' . ($startsHeaderPage + 1), "Revisi");
-        $sheet->mergeCells("S" . ($startsHeaderPage + 2) . ":T" . ($startsHeaderPage + 2))->setCellValue('S' . ($startsHeaderPage + 2), "$dataParentArray[revisi]");
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 0) . ":T" . ($startsHeaderPage + 0))->setCellValue('Q' . ($startsHeaderPage + 0), 'FO/QAS/Q1/1907s');
-        $sheet->mergeCells("B" . ($startsHeaderPage + 4) . ":D" . ($startsHeaderPage + 4))->setCellValue('B' . ($startsHeaderPage + 4), 'Nama part');
-        $sheet->mergeCells("B" . ($startsHeaderPage + 5) . ":D" . ($startsHeaderPage + 5))->setCellValue('B' . ($startsHeaderPage + 5), 'No. part');
-        $sheet->mergeCells("B" . ($startsHeaderPage + 6) . ":D" . ($startsHeaderPage + 6))->setCellValue('B' . ($startsHeaderPage + 6), 'Code');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 2) . ":R" . ($startsHeaderPage + 2))->setCellValue('R' . ($startsHeaderPage + 2), "$dataParentArray[revisi]");
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 0) . ":T" . ($startsHeaderPage + 0))->setCellValue('Q' . ($startsHeaderPage + 0), 'FO/QAS/Q1/1907');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 4) . ":E" . ($startsHeaderPage + 4))->setCellValue('B' . ($startsHeaderPage + 4), 'Nama part');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 5) . ":E" . ($startsHeaderPage + 5))->setCellValue('B' . ($startsHeaderPage + 5), 'No. part');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 6) . ":E" . ($startsHeaderPage + 6))->setCellValue('B' . ($startsHeaderPage + 6), 'Code');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 6) . ":R" . ($startsHeaderPage + 6))->setCellValue('Q' . ($startsHeaderPage + 6), 'Nama mesin');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 6) . ":R" . ($startsHeaderPage + 6))->setCellValue('Q' . ($startsHeaderPage + 6), 'No.mesin');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 6) . ":R" . ($startsHeaderPage + 6))->setCellValue('Q' . ($startsHeaderPage + 6), 'No.jig');
 
-        $sheet->mergeCells("K" . ($startsHeaderPage + 4))->setCellValue('K' . ($startsHeaderPage + 4), 'CUSTOMER');
+        $sheet->mergeCells("K" . ($startsHeaderPage + 4))->setCellValue('K' . ($startsHeaderPage + 4), 'Customer');
         $sheet->mergeCells("K" . ($startsHeaderPage + 5))->setCellValue('K' . ($startsHeaderPage + 5), 'Model');
         $sheet->mergeCells("K" . ($startsHeaderPage + 6))->setCellValue('K' . ($startsHeaderPage + 6), 'No.die');
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 4) . ":R" . ($startsHeaderPage + 4))->setCellValue('Q' . ($startsHeaderPage + 4), 'Nama mesin');
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 5) . ":R" . ($startsHeaderPage + 5))->setCellValue('Q' . ($startsHeaderPage + 5), 'No.mesin');
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 6) . ":R" . ($startsHeaderPage + 6))->setCellValue('Q' . ($startsHeaderPage + 6), 'No. jig');
 
 
         /* isi untuk judul or header */
