@@ -37,6 +37,14 @@ $dataParentArray = [
     'namaMesin' => '',
     'noMesin' => '',
     'noJig' => '',
+    'ket' => 'Untuk Job Set up, diambil sample 1 pcs / jig untuk pemeriksaan awal',
+    'max' => 'max',
+    'min' => 'min',
+    'n1' => '1',
+    'n2' => '2',
+    'n3' => '3',
+
+
 ];
 
 /* Buat Spreadsheet */
@@ -54,6 +62,7 @@ $textLeft = [];
 $textRight = [];
 $fontSizes = [];
 $ColoumsHeaderTable = [];
+$textitalic = [];
 
 try {
     $row = 1;
@@ -105,72 +114,50 @@ try {
     $sheet->mergeCells("S8:T8")->setCellValue('S8', "$dataParentArray[noMesin]");
     $sheet->mergeCells("S9:T9")->setCellValue('S9', "$dataParentArray[noJig]");
 
-    // $sheet->mergeCells("F8:M8")->setCellValue('F8', "$dataParentArray[material]"); /* model/dies/cavity */
-    // $sheet->mergeCells("F9:M9")->setCellValue('F9', "$dataParentArray[qty]"); /* Quantity */
-    // $sheet->mergeCells("F10:M10")->setCellValue('F10', "$dataParentArray[status]"); /* status */
-    // $sheet->mergeCells("F11:M11")->setCellValue('F11', "$dataParentArray[customer]"); /* customer */
-    // $sheet->mergeCells("F12:M12")->setCellValue('F12', "$dataParentArray[proses]"); /* proses */
-    // $sheet->mergeCells("O7:P7")->setCellValue('O7', ""); /* date inspected */
-    // $sheet->mergeCells("Q7:R7")->setCellValue('Q7', ""); /* date checked */
-    // $sheet->mergeCells("S7:T7")->setCellValue('S7', ""); /* date approval */
-    // $sheet->mergeCells("O8:P10")->setCellValue('O8', ""); /* sign inspected */
-    // $sheet->mergeCells("Q8:R10")->setCellValue('Q8', ""); /* sign checked */
-    // $sheet->mergeCells("S8:T10")->setCellValue('S8', ""); /* sign approval */
-    // $sheet->mergeCells("O11:P11")->setCellValue('O11', ""); /* name inspected */
-    // $sheet->mergeCells("Q11:R11")->setCellValue('Q11', ""); /* name checked */
-    // $sheet->mergeCells("S11:T11")->setCellValue('S11', ""); /* name approval */
 
     /* === Set header page 1 === */
 
     /* === set Header of table in content on page 1 === */
     $sheet->mergeCells("B13:B14")->setCellValue('B13', 'NO');
-    $sheet->mergeCells("C13:G14")->setCellValue('C13', 'INSPECTION ITEM');
-    $sheet->mergeCells("H13:H14")->setCellValue('H13', 'STD');
+    $sheet->mergeCells("C13:E14")->setCellValue('C13', 'ITEM');
+    $sheet->mergeCells("F13:H14")->setCellValue('F13', 'STD');
     $sheet->mergeCells("I13:J13")->setCellValue('I13', 'TOLERANSI');
     $sheet->setCellValue('I14', 'LOWER');
     $sheet->setCellValue('J14', 'UPPER');
-    $sheet->mergeCells("K13:L14")->setCellValue('K13', 'INPECTION METHOD');
-    $sheet->mergeCells("M13:Q13")->setCellValue('M13', 'SAMPLE');
-    $sheet->setCellValue('M14', '1');
-    $sheet->setCellValue('N14', '2');
-    $sheet->setCellValue('O14', '3');
-    $sheet->setCellValue('P14', '4');
-    $sheet->setCellValue('Q14', '5');
-    $sheet->mergeCells("R13:R14")->setCellValue('R13', 'X');
-    $sheet->mergeCells("S13:S14")->setCellValue('S13', 'R');
-    $sheet->mergeCells("T13:T14")->setCellValue('T13', 'JUDGE');
-    /* === set Header of table in content on page 1 === */
+    $sheet->mergeCells("K13:K14")->setCellValue('K13', 'CONTROL/METHOD');
+    $sheet->mergeCells("L13:T13")->setCellValue('L13', 'SAMPLE');
+    $sheet->setCellValue('L14', '1');
+    $sheet->setCellValue('M14', '2');
+    $sheet->setCellValue('N14', '3');
+    $sheet->setCellValue('O14', '4');
+    $sheet->setCellValue('P14', '5');
+    $sheet->setCellValue('Q14', '6');
+    $sheet->setCellValue('R14', '7');
+    $sheet->setCellValue('S14', '8');
+    $sheet->setCellValue('T14', '9');
 
-    /* === Set Content on table on page 1 === */
-    for ($i = 0; $i < $satuPageIsi; $i++) {
-        $starts = 15 + $i;
-        $number = $i + 1;
-        $sheet->setCellValue('B' . $starts, ""); /* NO */
-        $sheet->mergeCells("C$starts:G$starts")->setCellValue('C' . $starts, ''); /* inspection item */
-        $sheet->setCellValue('H' . $starts, ''); /* STD */
-        $sheet->setCellValue('I' . $starts, ''); /* lower */
-        $sheet->setCellValue('J' . $starts, ''); /* upper */
-        $sheet->mergeCells("K$starts:L$starts")->setCellValue('K' . $starts, '');
-        $sheet->setCellValue('M' . $starts, ''); /* sample 1 */
-        $sheet->setCellValue('N' . $starts, ''); /* sample 2 */
-        $sheet->setCellValue('O' . $starts, ''); /* sample 3 */
-        $sheet->setCellValue('P' . $starts, ''); /* sample 4 */
-        $sheet->setCellValue('Q' . $starts, ''); /* sample 5 */
-        $sheet->setCellValue('R' . $starts, ''); /* X */
-        $sheet->setCellValue('S' . $starts, ''); /* R */
-        $sheet->setCellValue('T' . $starts, ''); /* JUDGE */
+    // $sheet->mergeCells("R15:R16")->setCellValue('R15', 'X');
+    // $sheet->mergeCells("S15:S16")->setCellValue('S15', 'R');
+    // $sheet->mergeCells("T15:T16")->setCellValue('T15', 'JUDGE');
+    // $sheet->mergeCells("B13:B14")->setCellValue('B13', 'No');
+    // $sheet->mergeCells("C13:E14")->setCellValue('C13', 'Item');
+    // $sheet->mergeCells("F13:J14")->setCellValue('F13', 'Standart');
+    // $sheet->mergeCells("K13:K14")->setCellValue('K13', 'Control/Method');
+    // $sheet->mergeCells("L13:T13")->setCellValue('L13', 'Cavity Sample');
+    // $sheet->mergeCells("L13:T13")->setCellValue('L13', 'Cavity Sample');
+    // $sheet->mergeCells("B15:T16")->setCellValue('B15', 'I. LUBANG & INSERT PIN AREA MOVE');
 
-        /* Center Alignment */
-        $columnsToCenter = ['B', 'H', 'I', 'J', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
-        foreach ($columnsToCenter as $col) {
-            $sheet->getStyle($col . $starts)->getAlignment()
-                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-                ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        }
-    }
-    /* === Set Content on table on page 1 === */
+    // $sheet->setCellValue('L14', '1');
+    // $sheet->setCellValue('M14', '2');
+    // $sheet->setCellValue('N14', '3');
+    // $sheet->setCellValue('O14', '4');
+    // $sheet->setCellValue('P14', '5');
+    // $sheet->setCellValue('Q14', '6');
+    // $sheet->setCellValue('R14', '7');
+    // $sheet->setCellValue('S14', '8');
+    // $sheet->setCellValue('T14', '9');
 
-    /* === Set Footer page 1 === */
+
     $totalRows = 15 + $satuPageIsi;
     $footerStartRow = $totalRows;
     $sheet->mergeCells("B$footerStartRow:P" . ($footerStartRow + 3))->setCellValue('B' . $footerStartRow, 'Note :');
@@ -207,19 +194,58 @@ try {
     $sheet->mergeCells("S$approvalStartRow:T" . ($approvalStartRow + 3))->setCellValue("S$approvalStartRow", 'NG');
     /* === Set Footer page 1 === */
 
+
+    /* === set Header of table in content on page 1 === */
+
+    /* === Set Content on table on page 1 === */
+    for ($i = 0; $i < $satuPageIsi; $i++) {
+        $starts = 15 + $i;
+        $number = $i + 1;
+
+        $sheet->setCellValue('B' . $starts, $number); /* NO */
+        $sheet->mergeCells("C$starts:E$starts")->setCellValue('C' . $starts, ''); /*item */
+        $sheet->mergeCells("F$starts:H$starts")->setCellValue('F' . $starts, ''); /*item */
+        $sheet->setCellValue('I' . $starts, ''); /* lower */
+        $sheet->setCellValue('J' . $starts, ''); /* upper */
+        $sheet->setCellValue('K' . $starts, '');
+        $sheet->setCellValue('M' . $starts, ''); /* sample 1 */
+        $sheet->setCellValue('N' . $starts, ''); /* sample 2 */
+        $sheet->setCellValue('O' . $starts, ''); /* sample 3 */
+        $sheet->setCellValue('P' . $starts, ''); /* sample 4 */
+        $sheet->setCellValue('Q' . $starts, ''); /* sample 5 */
+        $sheet->setCellValue('R' . $starts, ''); /* X */
+        $sheet->setCellValue('S' . $starts, ''); /* R */
+        $sheet->setCellValue('T' . $starts, ''); /* JUDGE */
+
+        /* Center Alignment */
+        $columnsToCenter = ['B', 'H', 'I', 'J', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
+        foreach ($columnsToCenter as $col) {
+            $sheet->getStyle($col . $starts)->getAlignment()
+                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
+                ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        }
+
+    }
+
+    /* === Set Content on table on page 1 === */
+
     /* push array to style */
-    array_push($boldCells, "B13:T14", "F2", "Q2", "S2", "Q3", "S3", "S4", "Q4", "O6", "Q6", "S6", "N7", "N8", "N11", "N12", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "K7", "K8", "K9", "Q7", "Q8", "Q9", "G2", "G74", "K78", "K79", "K80", "Q78", "Q79", "Q80");
+    array_push($boldCells, "B15", "B13:T14", "F2", "Q2", "S2", "Q3", "S3", "S4", "Q4", "O6", "Q6", "S6", "N7", "N8", "N11", "N12", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "K7", "K8", "K9", "Q7", "Q8", "Q9", "G2", "G74", "K78", "K79", "K80", "Q78", "Q79", "Q80");
     array_push($boldCells, "B" . ($footerStartRow + 5), "B" . ($footerStartRow + 6), "B" . ($footerStartRow + 7), "D" . ($footerStartRow + 4), "F" . ($footerStartRow + 4), "I" . ($footerStartRow + 4), "L" . ($footerStartRow + 4), "N" . ($footerStartRow + 4), "R" . ($footerStartRow + 0), "R" . ($footerStartRow + 1), "R" . ($footerStartRow + 2), "Q" . ($footerStartRow + 3), "Q" . ($footerStartRow + 4), "S" . ($footerStartRow + 4));
     array_push($centerCells, "F2", "B13:T14", "G2:P6", "Q5:T6", "B6:F6", "S4:T4", "Q2", "Q3", "Q4", "S3", "S2", "Q3", "Q4", "O6", "Q6", "S6", "N7", "N8", "N11");
     array_push($centerCells, "D" . ($footerStartRow + 4), "F" . ($footerStartRow + 4), "I" . ($footerStartRow + 4), "L" . ($footerStartRow + 4), "N" . ($footerStartRow + 4), "Q" . ($footerStartRow + 3), "Q" . ($footerStartRow + 4), "S" . ($footerStartRow + 4));
     array_push($alignTextTop, "B$footerStartRow");
     array_push($textLeft, "B$footerStartRow");
-    array_push($textRight, "N12");
-    $fontSizes = array_merge($fontSizes, ["F2" => 22, "G2" => 22, "S3" => 28, "Q", "S" . ($footerStartRow + 4) => 48]);
+    $fontSizes = array_merge($fontSizes, ["F2" => 22, "S3" => 28, "B15" => 12, "Q",]);
     array_push($ColoumsHeaderTable, "B13:T14");
+    array_push($textitalic, "B15");
+
+    // $rowPageTerakhir = ($approvalStartRow + 3); // Baris terakhir dari page 1 (72)
+    // $latestRow = $rowPageTerakhir; // NILAINYA 72
 
     $rowPageTerakhir = ($approvalStartRow + 3); // Baris terakhir dari page 1 (72)
-    $latestRow = $rowPageTerakhir; // NILAINYA 72
+    $latestRow = $rowPageTerakhir;
+
 
     for ($page = 2; $page <= $jumlahPage; $page++) {
 
@@ -231,7 +257,7 @@ try {
         $startsHeaderPage = $pembatasAtas + 1; // 74
 
         /* set logo */
-        $sheet->mergeCells("B" . $startsHeaderPage . ":F" . ($startsHeaderPage + 2));
+        $sheet->mergeCells("B" . $startsHeaderPage . ":F" . ($startsHeaderPage + 3));
         $drawing = new Drawing();
         $drawing->setName('Company Logo');
         $drawing->setDescription('Company Logo');
@@ -241,57 +267,77 @@ try {
         $sheet->setCellValue('B' . $startsHeaderPage, '');
 
         /* set judul */
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 2) . ":T" . ($startsHeaderPage + 2))->setCellValue('Q' . ($startsHeaderPage + 2), "Berlaku mulai : $dataParentArray[berlakuForm].");
-        $sheet->mergeCells("G" . ($startsHeaderPage + 0) . ":P" . ($startsHeaderPage + 3))->setCellValue('G' . ($startsHeaderPage + 0), "CHECK SHEET VERIFIKASI JOB SET UP & PATROL CASTING");
-        $sheet->mergeCells("B" . ($startsHeaderPage + 3) . ":F" . ($startsHeaderPage + 3))->setCellValue('B' . ($startsHeaderPage + 3), 'FORM');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 3) . ":T" . ($startsHeaderPage + 4))->setCellValue('Q' . ($startsHeaderPage + 3), "Berlaku mulai : $dataParentArray[berlakuForm].");
+        $sheet->mergeCells("G" . ($startsHeaderPage + 0) . ":P" . ($startsHeaderPage + 4))->setCellValue('G' . ($startsHeaderPage + 0), "CHECK SHEET VERIFIKASI JOB SET UP & PATROL CASTING");
+        $sheet->mergeCells("B" . ($startsHeaderPage + 4) . ":F" . ($startsHeaderPage + 4))->setCellValue('B' . ($startsHeaderPage + 4), 'FORM');
         $sheet->mergeCells("S" . ($startsHeaderPage + 1) . ":T" . ($startsHeaderPage + 1))->setCellValue('S' . ($startsHeaderPage + 1), "Hal");
         $sheet->mergeCells("S" . ($startsHeaderPage + 2) . ":T" . ($startsHeaderPage + 2))->setCellValue('S' . ($startsHeaderPage + 2), "$dataParentArray[hal]");
         $sheet->mergeCells("Q" . ($startsHeaderPage + 1) . ":R" . ($startsHeaderPage + 1))->setCellValue('Q' . ($startsHeaderPage + 1), "Revisi");
         $sheet->mergeCells("Q" . ($startsHeaderPage + 2) . ":R" . ($startsHeaderPage + 2))->setCellValue('Q' . ($startsHeaderPage + 2), "$dataParentArray[revisi]");
         $sheet->mergeCells("Q" . ($startsHeaderPage + 0) . ":T" . ($startsHeaderPage + 0))->setCellValue('Q' . ($startsHeaderPage + 0), 'FO/QAS/Q1/1907');
-        $sheet->mergeCells("B" . ($startsHeaderPage + 4) . ":E" . ($startsHeaderPage + 4))->setCellValue('B' . ($startsHeaderPage + 4), 'Nama part');
-        $sheet->mergeCells("B" . ($startsHeaderPage + 5) . ":E" . ($startsHeaderPage + 5))->setCellValue('B' . ($startsHeaderPage + 5), 'No. part');
-        $sheet->mergeCells("B" . ($startsHeaderPage + 6) . ":E" . ($startsHeaderPage + 6))->setCellValue('B' . ($startsHeaderPage + 6), 'Code');
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 4) . ":R" . ($startsHeaderPage + 4))->setCellValue('Q' . ($startsHeaderPage + 4), 'Nama mesin');
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 5) . ":R" . ($startsHeaderPage + 5))->setCellValue('Q' . ($startsHeaderPage + 5), 'No.mesin');
-        $sheet->mergeCells("Q" . ($startsHeaderPage + 6) . ":R" . ($startsHeaderPage + 6))->setCellValue('Q' . ($startsHeaderPage + 6), 'No.jig');
-
-        $sheet->mergeCells("K" . ($startsHeaderPage + 4) . ":L" . ($startsHeaderPage + 4))->setCellValue('K' . ($startsHeaderPage + 4), 'Customer');
-        $sheet->mergeCells("K" . ($startsHeaderPage + 5) . ":L" . ($startsHeaderPage + 5))->setCellValue('K' . ($startsHeaderPage + 5), 'Model');
-        $sheet->mergeCells("K" . ($startsHeaderPage + 6) . ":L" . ($startsHeaderPage + 6))->setCellValue('K' . ($startsHeaderPage + 6), 'No.die');
-
+        $sheet->mergeCells("B" . ($startsHeaderPage + 5) . ":E" . ($startsHeaderPage + 5))->setCellValue('B' . ($startsHeaderPage + 5), 'Nama part');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 6) . ":E" . ($startsHeaderPage + 6))->setCellValue('B' . ($startsHeaderPage + 6), 'No. part');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 7) . ":E" . ($startsHeaderPage + 7))->setCellValue('B' . ($startsHeaderPage + 7), 'Code');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 5) . ":R" . ($startsHeaderPage + 5))->setCellValue('Q' . ($startsHeaderPage + 5), 'Nama mesin');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 6) . ":R" . ($startsHeaderPage + 6))->setCellValue('Q' . ($startsHeaderPage + 6), 'No.mesin');
+        $sheet->mergeCells("Q" . ($startsHeaderPage + 7) . ":R" . ($startsHeaderPage + 7))->setCellValue('Q' . ($startsHeaderPage + 7), 'No.jig');
+        $sheet->mergeCells("K" . ($startsHeaderPage + 5) . ":L" . ($startsHeaderPage + 5))->setCellValue('K' . ($startsHeaderPage + 5), 'Customer');
+        $sheet->mergeCells("K" . ($startsHeaderPage + 6) . ":L" . ($startsHeaderPage + 6))->setCellValue('K' . ($startsHeaderPage + 6), 'Model');
+        $sheet->mergeCells("K" . ($startsHeaderPage + 7) . ":L" . ($startsHeaderPage + 7))->setCellValue('K' . ($startsHeaderPage + 7), 'No.die');
+        $sheet->mergeCells("B" . ($startsHeaderPage + 8) . ":T" . ($startsHeaderPage + 8))->setCellValue('B' . ($startsHeaderPage + 8), "Keterangan : $dataParentArray[ket]");
 
         /* isi untuk judul or header */
-        $sheet->mergeCells("F" . ($startsHeaderPage + 4) . ":J" . ($startsHeaderPage + 4))->setCellValue('F' . ($startsHeaderPage + 4), $dataParentArray["namaPart"]);
-        $sheet->mergeCells("F" . ($startsHeaderPage + 5) . ":J" . ($startsHeaderPage + 5))->setCellValue('F' . ($startsHeaderPage + 5), $dataParentArray["noPart"]);
-        $sheet->mergeCells("F" . ($startsHeaderPage + 6) . ":J" . ($startsHeaderPage + 6))->setCellValue('F' . ($startsHeaderPage + 6), $dataParentArray["code"]);
-        $sheet->mergeCells("M" . ($startsHeaderPage + 4) . ":P" . ($startsHeaderPage + 4))->setCellValue('M' . ($startsHeaderPage + 4), $dataParentArray["customer"]);
-        $sheet->mergeCells("M" . ($startsHeaderPage + 5) . ":P" . ($startsHeaderPage + 5))->setCellValue('M' . ($startsHeaderPage + 5), $dataParentArray['model']);
-        $sheet->mergeCells("M" . ($startsHeaderPage + 6) . ":P" . ($startsHeaderPage + 6))->setCellValue('M' . ($startsHeaderPage + 6), $dataParentArray["noDie"]);
-        $sheet->mergeCells("S" . ($startsHeaderPage + 4) . ":T" . ($startsHeaderPage + 4))->setCellValue('S' . ($startsHeaderPage + 4), $dataParentArray["namaMesin"]);
-        $sheet->mergeCells("S" . ($startsHeaderPage + 5) . ":T" . ($startsHeaderPage + 5))->setCellValue('S' . ($startsHeaderPage + 5), $dataParentArray["noMesin"]);
-        $sheet->mergeCells("S" . ($startsHeaderPage + 6) . ":T" . ($startsHeaderPage + 6))->setCellValue('S' . ($startsHeaderPage + 6), $dataParentArray["noJig"]);
+        $sheet->mergeCells("F" . ($startsHeaderPage + 5) . ":J" . ($startsHeaderPage + 5))->setCellValue('F' . ($startsHeaderPage + 5), $dataParentArray["namaPart"]);
+        $sheet->mergeCells("F" . ($startsHeaderPage + 6) . ":J" . ($startsHeaderPage + 6))->setCellValue('F' . ($startsHeaderPage + 6), $dataParentArray["noPart"]);
+        $sheet->mergeCells("F" . ($startsHeaderPage + 7) . ":J" . ($startsHeaderPage + 7))->setCellValue('F' . ($startsHeaderPage + 7), $dataParentArray["code"]);
+        $sheet->mergeCells("M" . ($startsHeaderPage + 5) . ":P" . ($startsHeaderPage + 5))->setCellValue('M' . ($startsHeaderPage + 5), $dataParentArray["customer"]);
+        $sheet->mergeCells("M" . ($startsHeaderPage + 6) . ":P" . ($startsHeaderPage + 6))->setCellValue('M' . ($startsHeaderPage + 6), $dataParentArray['model']);
+        $sheet->mergeCells("M" . ($startsHeaderPage + 7) . ":P" . ($startsHeaderPage + 7))->setCellValue('M' . ($startsHeaderPage + 7), $dataParentArray["noDie"]);
+        $sheet->mergeCells("S" . ($startsHeaderPage + 5) . ":T" . ($startsHeaderPage + 5))->setCellValue('S' . ($startsHeaderPage + 5), $dataParentArray["namaMesin"]);
+        $sheet->mergeCells("S" . ($startsHeaderPage + 6) . ":T" . ($startsHeaderPage + 6))->setCellValue('S' . ($startsHeaderPage + 6), $dataParentArray["noMesin"]);
+        $sheet->mergeCells("S" . ($startsHeaderPage + 7) . ":T" . ($startsHeaderPage + 7))->setCellValue('S' . ($startsHeaderPage + 7), $dataParentArray["noJig"]);
 
         /* === set new header to page 2 === */
 
         /* === set Header of table on page 2 === */
         $startHeaderTabel = $startsHeaderPage + 11;
         $sheet->mergeCells("B" . ($startHeaderTabel + 0) . ":B" . ($startHeaderTabel + 1))->setCellValue('B' . ($startHeaderTabel + 0), 'NO');
-        $sheet->mergeCells("C" . ($startHeaderTabel + 0) . ":G" . ($startHeaderTabel + 1))->setCellValue('C' . ($startHeaderTabel + 0), 'INSPECTION ITEM');
-        $sheet->mergeCells("H" . ($startHeaderTabel + 0) . ":H" . ($startHeaderTabel + 1))->setCellValue('H' . ($startHeaderTabel + 0), 'STD');
+        $sheet->mergeCells("C" . ($startHeaderTabel + 0) . ":E" . ($startHeaderTabel + 1))->setCellValue('C' . ($startHeaderTabel + 0), 'ITEM');
+        $sheet->mergeCells("F" . ($startHeaderTabel + 0) . ":H" . ($startHeaderTabel + 1))->setCellValue('F' . ($startHeaderTabel + 0), 'STD');
         $sheet->mergeCells("I" . ($startHeaderTabel + 0) . ":J" . ($startHeaderTabel + 0))->setCellValue('I' . ($startHeaderTabel + 0), 'TOLERANSI');
         $sheet->setCellValue('I' . ($startHeaderTabel + 1), 'LOWER');
         $sheet->setCellValue('J' . ($startHeaderTabel + 1), 'UPPER');
-        $sheet->mergeCells("K" . ($startHeaderTabel + 0) . ":L" . ($startHeaderTabel + 1))->setCellValue('K' . ($startHeaderTabel + 0), 'INPECTION METHOD');
-        $sheet->mergeCells("M" . ($startHeaderTabel + 0) . ":K" . ($startHeaderTabel + 0))->setCellValue('M' . ($startHeaderTabel + 0), 'SAMPLE');
+        $sheet->mergeCells("K" . ($startHeaderTabel + 0) . ":K" . ($startHeaderTabel + 1))->setCellValue('K' . ($startHeaderTabel + 0), 'CONTROL/METHOD');
+        $sheet->mergeCells("L" . ($startHeaderTabel + 0) . ":T" . ($startHeaderTabel + 0))->setCellValue('L' . ($startHeaderTabel + 0), 'SAMPLE');
         $sheet->setCellValue('M' . ($startHeaderTabel + 1), '1');
         $sheet->setCellValue('N' . ($startHeaderTabel + 1), '2');
         $sheet->setCellValue('O' . ($startHeaderTabel + 1), '3');
         $sheet->setCellValue('P' . ($startHeaderTabel + 1), '4');
-        $sheet->setCellValue('Q' . ($startHeaderTabel + 1), '5');
-        $sheet->mergeCells("R" . ($startHeaderTabel + 0) . ":R" . ($startHeaderTabel + 1))->setCellValue('R' . ($startHeaderTabel + 0), 'X');
-        $sheet->mergeCells("S" . ($startHeaderTabel + 0) . ":S" . ($startHeaderTabel + 1))->setCellValue('S' . ($startHeaderTabel + 0), 'R');
-        $sheet->mergeCells("T" . ($startHeaderTabel + 0) . ":T" . ($startHeaderTabel + 1))->setCellValue('T' . ($startHeaderTabel + 0), 'JUDGE');
+        $sheet->setCellValue('Q' . ($startHeaderTabel + 1), '6');
+        $sheet->setCellValue('R' . ($startHeaderTabel + 1), '7');
+        $sheet->setCellValue('S' . ($startHeaderTabel + 1), '8');
+        $sheet->setCellValue('T' . ($startHeaderTabel + 1), '9');
+
+
+
+
+        // $sheet->mergeCells("B13:B14")->setCellValue('B13', 'NO');
+        // $sheet->mergeCells("C13:E14")->setCellValue('C13', 'ITEM');
+        // $sheet->mergeCells("F13:H14")->setCellValue('F13', 'STD');
+        // $sheet->mergeCells("I13:J13")->setCellValue('I13', 'TOLERANSI');
+        // $sheet->setCellValue('I14', 'LOWER');
+        // $sheet->setCellValue('J14', 'UPPER');
+        // $sheet->mergeCells("K13:K14")->setCellValue('K13', 'CONTROL/METHOD');
+        // $sheet->mergeCells("L13:T13")->setCellValue('L13', 'SAMPLE');
+        // $sheet->setCellValue('L14', '1');
+        // $sheet->setCellValue('M14', '2');
+        // $sheet->setCellValue('N14', '3');
+        // $sheet->setCellValue('O14', '4');
+        // $sheet->setCellValue('P14', '5');
+        // $sheet->setCellValue('Q14', '6');
+        // $sheet->setCellValue('R14', '7');
+        // $sheet->setCellValue('S14', '8');
+        // $sheet->setCellValue('T14', '9');
         /* === set Header of table on page 2 === */
 
         /* === Set Content on table on page 2 === */
@@ -299,12 +345,14 @@ try {
         for ($i = 0; $i < $satuPageIsi; $i++) {
             $starts = $startContentPage + $i;
             $number = $i + 1;
+
             $sheet->setCellValue('B' . $starts, ""); /* NO */
-            $sheet->mergeCells("C$starts:G$starts")->setCellValue('C' . $starts, ""); /* inspection item */
+            $sheet->mergeCells("C$starts:E$starts")->setCellValue('C' . $starts, ""); /* item */
             $sheet->setCellValue('H' . $starts, ""); /* STD */
             $sheet->setCellValue('I' . $starts, ""); /* lower */
             $sheet->setCellValue('J' . $starts, ""); /* upper */
             $sheet->mergeCells("K$starts:L$starts")->setCellValue('K' . $starts, "");
+            $sheet->mergeCells("F$starts:H$starts")->setCellValue('F' . $starts, "");
             $sheet->setCellValue('M' . $starts, ""); /* sample 1 */
             $sheet->setCellValue('N' . $starts, ""); /* sample 2 */
             $sheet->setCellValue('O' . $starts, ""); /* sample 3 */
@@ -362,9 +410,37 @@ try {
         $latestRow = $approvalStartRowPage + 3;
         /* === Set Footer page 2 === */
 
-        array_push($boldCells, "B" . ($startsHeaderPage + 11), "T" . ($startsHeaderPage + 12), "F" . ($startsHeaderPage + 0), "Q" . ($startsHeaderPage + 0), "S" . ($startsHeaderPage + 0), "Q" . ($startsHeaderPage + 1), "S" . ($startsHeaderPage + 1), "Q" . ($startsHeaderPage + 2), "O" . ($startsHeaderPage + 4), "Q" . ($startsHeaderPage + 4), "S" . ($startsHeaderPage + 4), "N" . ($startsHeaderPage + 5), "N" . ($startsHeaderPage + 6), "N" . ($startsHeaderPage + 9), "N" . ($startsHeaderPage + 10), "B" . ($startsHeaderPage + 3), "B" . ($startsHeaderPage + 4), "B" . ($startsHeaderPage + 5), "B" . ($startsHeaderPage + 6), "B" . ($startsHeaderPage + 7), "B" . ($startsHeaderPage + 8), "B" . ($startsHeaderPage + 9), "B" . ($startsHeaderPage + 10));
-        array_push($boldCells, "B" . ($footerStartRowPage + 3), "B" . ($footerStartRowPage + 5), "B" . ($footerStartRowPage + 6), "B" . ($footerStartRowPage + 7), "D" . ($footerStartRowPage + 4), "F" . ($footerStartRowPage + 4), "K" . ($footerStartRowPage + 4), "N" . ($footerStartRowPage + 4), "P" . ($footerStartRowPage + 4), "R" . ($footerStartRowPage + 0), "R" . ($footerStartRowPage + 1), "R" . ($footerStartRowPage + 2), "Q" . ($footerStartRowPage + 3), "Q" . ($footerStartRowPage + 4), "S" . ($footerStartRowPage + 4));
-        array_push($centerCells, "Q" . ($startsHeaderPage + 3), "B" . ($startsHeaderPage + 3), "Q" . ($startsHeaderPage + 2), "S" . ($startsHeaderPage + 2), "F" . ($startsHeaderPage + 0), "B" . ($startsHeaderPage + 11) . ":T" . ($startsHeaderPage + 12), "Q" . ($startsHeaderPage + 0), "Q" . ($startsHeaderPage + 1), "Q" . ($startsHeaderPage + 2), "S" . ($startsHeaderPage + 1), "S" . ($startsHeaderPage + 0), "Q" . ($startsHeaderPage + 1), "Q" . ($startsHeaderPage + 2), "O" . ($startsHeaderPage + 4), "S" . ($startsHeaderPage + 4), "N" . ($startsHeaderPage + 5), "N" . ($startsHeaderPage + 6), "N" . ($startsHeaderPage + 9), "G" . ($startsHeaderPage + 1));
+        array_push(
+            $boldCells,
+            "B" . ($startsHeaderPage + 11),
+            "T" . ($startsHeaderPage + 12),
+            "F" . ($startsHeaderPage + 0),
+            "Q" . ($startsHeaderPage + 0),
+            "S" . ($startsHeaderPage + 0),
+            "Q" . ($startsHeaderPage + 1),
+            "S" . ($startsHeaderPage + 2),
+            "Q" . ($startsHeaderPage + 2),
+            "O" . ($startsHeaderPage + 4),
+            "Q" . ($startsHeaderPage + 4),
+            "S" . ($startsHeaderPage + 4),
+            "N" . ($startsHeaderPage + 5),
+            "N" . ($startsHeaderPage + 6),
+            "N" . ($startsHeaderPage + 9),
+            "N" . ($startsHeaderPage + 10),
+            "B" . ($startsHeaderPage + 3),
+            "B" . ($startsHeaderPage + 4),
+            "B" . ($startsHeaderPage + 5),
+            "B" . ($startsHeaderPage + 6),
+            "B" . ($startsHeaderPage + 7),
+            "B" . ($startsHeaderPage + 8),
+            "B" . ($startsHeaderPage + 9),
+            "B" . ($startsHeaderPage + 10),
+            "K" . ($startsHeaderPage + 7),
+            "Q" . ($startsHeaderPage + 7),
+
+        );
+        array_push($boldCells, "B" . ($footerStartRowPage + 4), "B" . ($footerStartRowPage + 5), "B" . ($footerStartRowPage + 6), "B" . ($footerStartRowPage + 7), "D" . ($footerStartRowPage + 4), "F" . ($footerStartRowPage + 4), "K" . ($footerStartRowPage + 4), "N" . ($footerStartRowPage + 4), "P" . ($footerStartRowPage + 4), "R" . ($footerStartRowPage + 0), "R" . ($footerStartRowPage + 1), "R" . ($footerStartRowPage + 2), "Q" . ($footerStartRowPage + 3), "Q" . ($footerStartRowPage + 4), "S" . ($footerStartRowPage + 4));
+        array_push($centerCells, "B" . ($startsHeaderPage + 4), "Q" . ($startsHeaderPage + 3), "B" . ($startsHeaderPage + 3), "Q" . ($startsHeaderPage + 2), "S" . ($startsHeaderPage + 2), "F" . ($startsHeaderPage + 0), "B" . ($startsHeaderPage + 11) . ":T" . ($startsHeaderPage + 12), "Q" . ($startsHeaderPage + 0), "Q" . ($startsHeaderPage + 1), "Q" . ($startsHeaderPage + 2), "S" . ($startsHeaderPage + 1), "S" . ($startsHeaderPage + 0), "Q" . ($startsHeaderPage + 1), "Q" . ($startsHeaderPage + 2), "O" . ($startsHeaderPage + 4), "S" . ($startsHeaderPage + 4), "N" . ($startsHeaderPage + 5), "N" . ($startsHeaderPage + 6), "N" . ($startsHeaderPage + 9), "G" . ($startsHeaderPage + 1));
         array_push($centerCells, "D" . ($footerStartRowPage + 4), "F" . ($footerStartRowPage + 4), "K" . ($footerStartRowPage + 4), "N" . ($footerStartRowPage + 4), "P" . ($footerStartRowPage + 4), "Q" . ($footerStartRowPage + 3), "S" . ($footerStartRowPage + 4));
         array_push($alignTextTop, "B$footerStartRowPage");
         array_push($textLeft, "B$footerStartRowPage");
@@ -427,6 +503,14 @@ try {
         $sheet->getStyle($cell)->applyFromArray([
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_RIGHT,
+            ],
+        ]);
+    }
+
+    foreach ($textitalic as $cell) {
+        $sheet->getStyle($cell)->applyFromArray([
+            'font' => [
+                'italic' => true,
             ],
         ]);
     }
